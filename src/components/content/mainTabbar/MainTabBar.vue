@@ -34,7 +34,7 @@
     name: "MainTabBar",
     data() {
       return {
-        Existence: true, // 判断登录，注册和个人页面的出现关系
+        Existence: false, // 判断登录，注册和个人页面的出现关系
       }
     },
     components: {

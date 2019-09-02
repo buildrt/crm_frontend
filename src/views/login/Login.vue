@@ -70,8 +70,8 @@
   }
 
   .info form input[type="submit"], button{
-    outline:  0;
-    background-color: palevioletred;
+    border:  0;
+    background-color: #1E90FF;
     width: 100px;
     height: 40px;
     font-size: 18px;
@@ -80,7 +80,7 @@
 
   #send {
     position: relative;
-    margin-left: 16%;
+    margin-left: 26%;
     margin-right: 18%;
   }
 

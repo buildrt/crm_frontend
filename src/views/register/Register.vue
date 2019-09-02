@@ -253,7 +253,7 @@
         if (document.getElementById("sub").disabled == true) {
           document.getElementById("sub").style.backgroundColor = '#dbdbdb';
         }else {
-          document.getElementById("sub").style.backgroundColor = 'palevioletred';
+          document.getElementById("sub").style.backgroundColor = '#1E90FF';
         }
       },
       //提交判断
@@ -292,6 +292,7 @@
     color: #000;
   }
   #sub {
+    border: 0;
     background-color: #dbdbdb;
     width: 100px;
     height: 40px;
