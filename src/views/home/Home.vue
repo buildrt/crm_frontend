@@ -5,6 +5,16 @@
 </template>
 
 <script>
+  import {request} from "../../network/request";
+
+  request({
+    url: '/api/v1/home/multidata'
+  }).then(res => {
+    console.log(res);
+  }).catch(err => {
+    console.log(err);
+  });
+
   export default {
     name: "Home"
   }
