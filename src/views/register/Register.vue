@@ -3,7 +3,7 @@
     <div id="info_reg">
       <!--<img src="../../assets/img/register/loginimg.jpg"/>-->
       <div id="showdiv">
-        <form action="#" method="get" @submit.prevent="checkSub">
+        <form action="#" method="get" ref="formSub" @submit="checkSub()">
           <table>
             <tr>
               <td width="80px">用户名:</td>
@@ -257,7 +257,7 @@
         }
       },
       //提交判断
-      checkSub(){
+      checkSub(event){
         //注册前再全体校验
         this.checkUname();
         this.checkPwd();
@@ -265,7 +265,11 @@
         this.checkPhone();
         this.checkMail();
         this.checkCode();
-        return this.checkUname()&&this.checkPwd()&&this.checkPwd2()&&this.checkPhone()&&this.checkMail()&&this.checkCode();
+        if (this.checkUname()&&this.checkPwd()&&this.checkPwd2()&&this.checkPhone()&&this.checkMail()&&this.checkCode()) {
+          this.form.submit();
+        }else {
+          event.preventDefault();
+        }
       }
     },
     created() {

@@ -1,14 +1,14 @@
 <template>
   <div>
     <div id="light" class="white_content">
-      <form action="#" method="get">
+      <form action="#" method="get" @submit="checkEdit">
         <table>
           <tr>
             <td>
               <label for="iname">姓名</label>
             </td>
             <td>
-              <input type="text" id="iname" :value="dname">
+              <input type="text" name="name" id="iname" :value="dname">
             </td>
             <td>
               <label for="igender">性别</label>
@@ -26,21 +26,21 @@
               <label for="iphone">手机号</label>
             </td>
             <td>
-              <input type="tel" id="iphone" :value="dphone">
+              <input type="tel" name="phone" id="iphone" :value="dphone">
             </td>
             <td>
               <label for="iemail">邮箱</label>
             </td>
             <td>
-              <input type="email" id="iemail" :value="demail">
+              <input type="email" name="email" id="iemail" :value="demail">
             </td>
           </tr>
           <tr>
             <td>
-              <input type="submit" id="sub" value="保存">
+              <button id="sub" @click = "checkEdit">保存</button>
             </td>
             <td>
-              <button id="back" @click = "backDiv">取消</button>
+              <button id="back" @click = "backDiv" >取消</button>
             </td>
           </tr>
         </table>
@@ -68,9 +68,19 @@
       }
     },
     methods: {
-      backDiv() {
+      backDiv(event) {
+        event.preventDefault();
         document.getElementById('light').style.display='none';
-        document.getElementById('fade').style.display='none'
+        document.getElementById('fade').style.display='none';
+      },
+      checkEdit(event) {
+        if (document.getElementById('iname').value !== this.ename) {
+          // console.log(document.getElementById('iname').value);
+          // console.log(this.ename);
+          this.form.submit();
+        }else {
+          event.preventDefault();
+        }
       }
     }
   }
