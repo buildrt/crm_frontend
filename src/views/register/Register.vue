@@ -1,9 +1,8 @@
 <template>
   <div>
     <div id="info_reg">
-      <!--<img src="../../assets/img/register/loginimg.jpg"/>-->
       <div id="showdiv">
-        <form action="#" method="get" ref="formSub" @submit="checkSub()">
+        <form action="#" method="get" @submit="checkSub">
           <table>
             <tr>
               <td width="80px">用户名:</td>
@@ -62,7 +61,7 @@
             </tr>
             <tr>
               <td>
-                <input type="submit" id="sub" name="" value="注册" disabled="disabled"/>
+                <button id="sub" disabled="disabled" @click="checkSub">注 册</button>
               </td>
             </tr>
           </table>
@@ -259,14 +258,16 @@
       //提交判断
       checkSub(event){
         //注册前再全体校验
-        this.checkUname();
-        this.checkPwd();
-        this.checkPwd2();
-        this.checkPhone();
-        this.checkMail();
-        this.checkCode();
+        console.log(this.checkUname());
+        console.log(this.checkPwd());
+        console.log(this.checkPwd2());
+        console.log(this.checkPhone());
+        console.log(this.checkMail());
+        console.log(this.checkCode());
         if (this.checkUname()&&this.checkPwd()&&this.checkPwd2()&&this.checkPhone()&&this.checkMail()&&this.checkCode()) {
           this.form.submit();
+          this.$router.push('/login');
+          // this.$store.commit('loginJudgeChange'); //改变loginJudge参数，使Profile界面显示出来
         }else {
           event.preventDefault();
         }

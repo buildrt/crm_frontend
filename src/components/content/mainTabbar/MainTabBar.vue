@@ -6,19 +6,19 @@
       <div slot="item-text">首页</div>
     </tab-bar-item>
 
-    <tab-bar-item path="/login" id="login" v-if="Existence">
+    <tab-bar-item path="/login" id="login" v-if="$store.state.loginJudge">
       <img slot="item-icon" src="~assets/img/tabbar/login/login.svg" alt="">
       <img slot="item-icon-active" src="~assets/img/tabbar/login/login_active.svg"/>
       <div slot="item-text">登录</div>
     </tab-bar-item>
 
-    <tab-bar-item path="/register" id="register" v-if="Existence">
+    <tab-bar-item path="/register" id="register" v-if="$store.state.loginJudge">
       <img slot="item-icon" src="~assets/img/tabbar/register/register.svg" alt="">
       <img slot="item-icon-active" src="~assets/img/tabbar/register/register_active.svg" alt="">
       <div slot="item-text">注册</div>
     </tab-bar-item>
 
-    <tab-bar-item path="/profile" id="profile" v-if="!Existence">
+    <tab-bar-item path="/profile" id="profile" v-if="!$store.state.loginJudge">
       <img slot="item-icon" src="~assets/img/tabbar/profile/profile.svg" alt="">
       <img slot="item-icon-active" src="~assets/img/tabbar/profile/profile_active.svg" alt="">
       <div slot="item-text">我的</div>
@@ -32,11 +32,6 @@
 
   export default {
     name: "MainTabBar",
-    data() {
-      return {
-        Existence: false, // 判断登录，注册和个人页面的出现关系
-      }
-    },
     components: {
       TabBar,
       TabBarItem

@@ -1,20 +1,12 @@
 <template>
   <div id="homepage">
     <h2>首页</h2>
+    <h2>{{$store.state.counter}}</h2>
+    <h2>{{$store.state.loginJudge}}</h2>
   </div>
 </template>
 
 <script>
-  import {request} from "../../network/request";
-
-  request({
-    url: '/api/v1/home/multidata'
-  }).then(res => {
-    console.log(res);
-  }).catch(err => {
-    console.log(err);
-  });
-
   export default {
     name: "Home"
   }

@@ -45,6 +45,7 @@
           </tbody>
         </table>
       </div>
+      <button id="logout" @click="logOut">注销</button>
     </div>
   </div>
 </template>
@@ -74,6 +75,10 @@
       },
       editBack() {
         this.$router.push('/home');
+      },
+      logOut() {
+        this.$store.commit('loginJudgeChange');  //改变loginJudge参数，使Login和Register界面显示出来
+        this.$router.push('/login');
       }
     }
   }
@@ -88,7 +93,7 @@
     top: 5%;
     right: 3%;
   }
-  #edit Button {
+  #edit Button,#logout {
     background-color: #1E90FF;
     font-size: 14px;
     color: white;
@@ -102,7 +107,7 @@
   #editInfo {
     width: 80px;
     height: 30px;
-    margin-right: 10px;
+    margin-right: 15px;
   }
   tr {
     height: 30px;
@@ -112,15 +117,21 @@
     font-size: 14px;
     text-align: left;
   }
-
   th{
     text-align: left;
     padding-bottom: 10px;
   }
-
   table {
     position: absolute;
     left: 20%;
     top: 42%;
+  }
+  #logout {
+    position: absolute;
+    margin-right: 10px;
+    top: 82%;
+    right: 3%;
+    width: 50px;
+    height: 30px;
   }
 </style>

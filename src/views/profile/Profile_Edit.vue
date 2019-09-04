@@ -15,7 +15,7 @@
             </td>
             <td>
               <select name="gender" id="igender">
-                <option value="">--请选择--</option>
+                <option value="请选择">--请选择--</option>
                 <option value="男">男</option>
                 <option value="女">女</option>
               </select>
@@ -74,9 +74,11 @@
         document.getElementById('fade').style.display='none';
       },
       checkEdit(event) {
-        if (document.getElementById('iname').value !== this.ename) {
-          // console.log(document.getElementById('iname').value);
-          // console.log(this.ename);
+        const piname = document.getElementById('iname');
+        const piphone = document.getElementById('iphone');
+        const piemail = document.getElementById('iemail');
+        const pigender = document.getElementById('igender');
+        if ((piname.value !== this.ename || piphone.value !== this.ephone || piemail.value !== this.eemail) && (pigender.value !== '请选择' && pigender.value !== this.egender)) {
           this.form.submit();
         }else {
           event.preventDefault();
