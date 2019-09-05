@@ -2,23 +2,23 @@
   <div id="login">
     <div id="showdiv">
       <div class="info">
-        <form class="loginInfo" action="#" method="get">
+        <form class="loginInfo" action="#" method="get" @submit.prevent>
           <table>
             <tr>
               <td>用户名:</td>
               <td>
-                <input type="text" class="username" name="username" id="username" onFocus="this.value=''" value="请输入用户名"/>
+                <input type="text" v-model="username" class="username" name="username" id="username" onFocus="this.value=''" value="请输入用户名"/>
               </td>
             </tr>
             <tr>
               <td>密码:</td>
               <td>
-                <input type="password" class="pwd" onFocus="this.value=''" value="*******" name="pwd" id="pwd">
+                <input type="password" v-model="password" class="pwd" onFocus="this.value=''" value="*******" name="pwd" id="pwd">
               </td>
             </tr>
             <tr>
               <td colspan="2">
-                <input type="submit" class="send" id="send" value="登    录"/>
+                <button class="send" id="send" @click="Login">登  录</button>
                 <router-link to="/register" tag="button">注   册</router-link>
               </td>
             </tr>
@@ -30,8 +30,52 @@
 </template>
 
 <script>
+  import {request} from "../../network/request";
+
   export default {
-    name: "Login"
+    name: "Login",
+    data(){
+      return {
+        username: 'Amazon',
+        password: '123456'
+      }
+    },
+    methods: {
+      Login() {
+        request({
+          url: '/login'
+        }).then(res => {
+          let resData = res.data;
+          let len = res.data.length;
+          let userNameArr = [];
+          let passWordArr = [];
+          let ses = window.sessionStorage;
+          for (let i=0; i<len; i++) {
+            userNameArr.push(resData[i].username);
+            passWordArr.push(resData[i].password);
+          }
+          // console.log(userNameArr, passWordArr);
+          if (userNameArr.indexOf(this.username) === -1) {
+            alert('账号不存在');
+          }else {
+            let index = userNameArr.indexOf(this.username);
+            if (passWordArr[index] === this.password) {
+              // 把token放在sessionStorage中
+              ses.setItem('data', resData[index].token);
+
+              alert('登录成功');
+              // 跳转到首页
+              this.$router.push('/home');
+              this.$store.commit('loginJudgeChange'); //改变loginJudge参数，使Profile界面显示出来
+            }else {
+              alert('密码错误');
+            }
+          }
+        }).catch(error => {
+          console.log('连接数据库失败');
+        })
+      }
+    }
   }
 </script>
 
