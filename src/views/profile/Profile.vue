@@ -77,6 +77,10 @@
         this.$router.push('/home');
       },
       logOut() {
+        // 注销后 清除session信息 ，并返回登录页
+        //console.log(window.sessionStorage,'before');
+        window.sessionStorage.removeItem('data');
+        //console.log(window.sessionStorage,'after');
         this.$store.commit('loginJudgeChange');  //改变loginJudge参数，使Login和Register界面显示出来
         this.$router.push('/login');
       }
