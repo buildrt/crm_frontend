@@ -1,4 +1,5 @@
 <template>
+
   <div id="login">
     <div id="showdiv">
       <div class="info">
@@ -84,7 +85,7 @@
 
   .info{
     position: relative;
-    top: -10%;
+    top: 10%;
     left: -33%;
     width: 70%;
   }
@@ -115,7 +116,7 @@
 
   .info form input[type="submit"], button{
     border:  0;
-    background-color: #1E90FF;
+    background-color: deeppink;
     width: 100px;
     height: 40px;
     font-size: 18px;

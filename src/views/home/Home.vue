@@ -1,14 +1,17 @@
 <template>
   <div id="homepage">
-    <h2>首页</h2>
-    <h2>{{$store.state.counter}}</h2>
-    <h2>{{$store.state.loginJudge}}</h2>
+    <home-tab-bar></home-tab-bar>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+  import HomeTabBar from '../../components/content/homeTabbar/HomeTabBar'
   export default {
-    name: "Home"
+    name: "Home",
+    components: {
+      HomeTabBar
+    }
   }
 </script>
 

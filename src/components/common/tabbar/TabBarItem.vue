@@ -57,7 +57,7 @@
   }
 
   div {
-    display: inline;
-    text-align: center;
-  }
+     display: inline;
+     text-align: center;
+   }
 </style>
