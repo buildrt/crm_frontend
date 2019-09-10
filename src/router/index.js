@@ -22,7 +22,8 @@ const routes = [
     component: Login,
     meta: {
       title: '登录',
-      needLogin: false
+      needLogin: false,
+      index: 0
     }
   },
   {
@@ -30,7 +31,8 @@ const routes = [
     component: Home,
     meta: {
       title: '首页',
-      needLogin: true   // 判断每次路由跳转的链接是否需要登录
+      needLogin: true,   // 判断每次路由跳转的链接是否需要登录
+      index: 1,          // 判断页面是否添加动画
     },
     children: [
       {
@@ -47,7 +49,8 @@ const routes = [
     path: '/register',
     component: Register,
     meta: {
-      title: '注册'
+      title: '注册',
+      index: 0
     }
   },
   {
@@ -66,37 +69,37 @@ const router = new VueRouter({
 });
 
 // 全局导航守卫
-// router.beforeEach((to, from, next) => {
-//   // document.title = to.matched[0].meta.title;
-//   // next();
-//
-//   //路由中设置的needLogin字段就在to当中
-//   if (window.sessionStorage.data) {
-//     console.log(window.sessionStorage);
-//     if (to.path === '/login') {
-//       // 在已经登录状态下，访问Login.vue页面 会跳到Home.vue
-//       document.title = to.matched[0].meta.title;
-//       next({
-//         path: '/home'
-//       });
-//     }else {
-//       document.title = to.matched[0].meta.title;
-//       next();
-//     }
-//   }else {
-//     // 如果没有session ,访问任何页面。都会进入到 登录页
-//     if (to.path === '/login' || to.path === '/register') {  // 如果是登录页面的话，直接next()
-//       document.title = to.matched[0].meta.title;
-//       next();
-//     }else {
-//       // 否则 跳转到登录页面
-//       next({
-//         path: '/login'
-//       });
-//       alert("你必须先登录")
-//     }
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  // document.title = to.matched[0].meta.title;
+  // next();
+
+  //路由中设置的needLogin字段就在to当中
+  if (window.sessionStorage.data) {
+    console.log(window.sessionStorage);
+    if (to.path === '/login') {
+      // 在已经登录状态下，访问Login.vue页面 会跳到Home.vue
+      document.title = to.matched[0].meta.title;
+      next({
+        path: '/home'
+      });
+    }else {
+      document.title = to.matched[0].meta.title;
+      next();
+    }
+  }else {
+    // 如果没有session ,访问任何页面。都会进入到 登录页
+    if (to.path === '/login' || to.path === '/register') {  // 如果是登录页面的话，直接next()
+      document.title = to.matched[0].meta.title;
+      next();
+    }else {
+      // 否则 跳转到登录页面
+      next({
+        path: '/login'
+      });
+      alert("你必须先登录")
+    }
+  }
+});
 
 // 3.导出
 export default router

@@ -2,9 +2,10 @@
   <div id="login">
     <div id="showdiv">
       <div>
-        <video autoplay loop muted>
-          <source src="../../assets/video/loginBac.mp4" type="video/mp4"/>
-        </video>
+        <!--<video autoplay loop muted>-->
+          <!--<source src="../../assets/video/loginBac.mp4" type="video/mp4"/>-->
+        <!--</video>-->
+        <img id="bcImg" src="../../assets/img/login/loginBac.jpg" alt="">
       </div>
 
       <div class="info">
@@ -95,7 +96,7 @@
   .info{
     position: absolute;
     top: 20%;
-    left: 33%;
+    left: 35%;
     width: 30%;
     height: 75%;
     padding-left: 4%;

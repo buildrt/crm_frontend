@@ -89,8 +89,16 @@
 </script>
 
 <style scoped>
-  @import "../../assets/css/login_register/showdiv.css";
   @import "../../assets/css/profile/edit.css";
+
+  #showdiv {
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    background-color: white;
+    width: 60%;
+    height: 81%;
+  }
 
   #edit {
     position: absolute;
