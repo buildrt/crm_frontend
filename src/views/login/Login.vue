@@ -1,24 +1,33 @@
 <template>
-
   <div id="login">
     <div id="showdiv">
+      <div>
+        <video autoplay loop muted>
+          <source src="../../assets/video/loginBac.mp4" type="video/mp4"/>
+        </video>
+      </div>
+
       <div class="info">
+        <div id="title">
+          <!-- 用图片代替文字 -->
+          <img src="" alt="">
+        </div>
         <form class="loginInfo" action="#" method="get" @submit.prevent>
           <table>
             <tr>
-              <td>用户名:</td>
               <td>
-                <input type="text" v-model="username" class="username" name="username" id="username" onFocus="this.value=''" value="请输入用户名"/>
+                <img id="userImg" src="../../assets/img/login/userImg.svg" alt="">
+                <input type="text" v-model="username" autocomplete="off" class="username" name="username" id="username" onFocus="this.value=''" value="请输入用户名"/>
               </td>
             </tr>
             <tr>
-              <td>密码:</td>
               <td>
+                <img id="pwdImg" src="../../assets/img/login/pwdImg.svg" alt="">
                 <input type="password" v-model="password" class="pwd" onFocus="this.value=''" value="*******" name="pwd" id="pwd">
               </td>
             </tr>
             <tr>
-              <td colspan="2">
+              <td>
                 <button class="send" id="send" @click="Login">登  录</button>
                 <router-link to="/register" tag="button">注   册</router-link>
               </td>
@@ -84,26 +93,53 @@
   @import "../../assets/css/login_register/showdiv.css";
 
   .info{
-    position: relative;
-    top: 10%;
-    left: -33%;
-    width: 70%;
+    position: absolute;
+    top: 20%;
+    left: 33%;
+    width: 30%;
+    height: 75%;
+    padding-left: 4%;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px rgba(0,0,0,0.3);
   }
 
   .info form{
     position: relative;
-    top: 100px;
-    left: 50%;
+    top: 50%;
   }
 
   .info form input[type="text"],[type='password']{
-     outline: solid 1px gainsboro;
      height: 30px;
      width: 300px;
      font-size: 18px;
      padding-left: 10px;
      color: darkgrey;
+     background-color: rgba(0,0,0,0.5);
+     border: 0;
+     border-radius: 5px;
+     outline: none;
    }
+
+  input[type="text"] {
+    text-indent: 42px; /*input标签光标和输入框左边有点距离*/
+    text-align: left;
+  }
+
+  #userImg {
+    position: absolute;
+    left: 8px;
+  }
+
+  .pwd {
+    text-indent: 42px;
+    text-align: left;
+  }
+
+  #pwdImg {
+    position: absolute;
+    left: 8px;
+  }
 
   table {
     font-size: 18px;
@@ -125,7 +161,7 @@
 
   #send {
     position: relative;
-    margin-left: 26%;
+    margin-left: 9%;
     margin-right: 18%;
   }
 

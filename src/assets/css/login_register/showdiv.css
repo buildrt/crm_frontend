@@ -1,10 +1,15 @@
-#showdiv {
-  position: absolute;
-  padding-left: 20%;
-  padding-top: 10%;
-  top: 12%;
-  left: 15%;
-  width: 70%;
-  height: 85%;
-  background-color: #fff;
+video{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  height: auto;
+  width: auto;
+  /*加滤镜*/
+  /*filter: blur(15px); //背景模糊设置 */
+  /*-webkit-filter: grayscale(100%);*/
+  /*filter:grayscale(100%); //背景灰度设置*/
+  z-index:-11
 }
+
