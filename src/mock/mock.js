@@ -7,12 +7,10 @@ const loginData = function () {
     {
       username: 'Amazon',
       password: '123456',
-      token: @data
     },
     {
       username: 'Lucy',
       password: '456789',
-      token: @data
     }
   ];
   return {

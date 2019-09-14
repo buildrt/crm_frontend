@@ -6,10 +6,10 @@
       <div slot="item-text">任务</div>
     </tab-bar-item>
 
-    <tab-bar-item path="/profile" id="profile">
-      <img slot="item-icon" src="~assets/img/tabbar/profile/profile.svg" alt="">
-      <img slot="item-icon-active" src="~assets/img/tabbar/profile/profile_active.svg" alt="">
-      <div slot="item-text">我的</div>
+    <tab-bar-item path="echarts" id="echarts">
+      <img slot="item-icon" src="~assets/img/tabbar/home/home.svg" alt="">
+      <img slot="item-icon-active" src="~assets/img/tabbar/home/home_active.svg"/>
+      <div slot="item-text">图表</div>
     </tab-bar-item>
   </tab-bar>
 </template>
@@ -40,7 +40,7 @@
     position: relative;
     left: 3%;
   }
-  #profile {
+  #echarts {
     position: relative;
     top: 80%;
     left: -30%;

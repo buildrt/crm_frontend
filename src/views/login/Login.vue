@@ -45,6 +45,7 @@
 
   export default {
     name: "Login",
+    inject: ['reload'],
     data(){
       return {
         username: 'Amazon',
@@ -86,6 +87,9 @@
           console.log('连接数据库失败');
         })
       }
+    },
+    mounted() {
+      this.reload()    // 调用自动刷新的方法,避免注销登录时，登录界面加载问题
     }
   }
 </script>

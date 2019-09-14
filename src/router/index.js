@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 const Home = () => import('../views/home/Home');
 const HomeMission = () => import('../views/home/HomeMission');
+const HomeEcharts = () => import('../views/home/echarts/HomeEcharts');
 
 const Register = () => import('../views/register/Register');
 const Login = () => import('../views/login/Login');
@@ -42,6 +43,10 @@ const routes = [
       {
         path: 'mission',
         component: HomeMission
+      },
+      {
+        path: 'echarts',
+        component: HomeEcharts
       }
     ]
   },

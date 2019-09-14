@@ -19,7 +19,8 @@
     },
     data() {
       return {
-        transitionName: ''
+        transitionName: '',
+        isRouterAlive: true
       }
     },
     watch: {
@@ -33,6 +34,20 @@
         } else {
           this.transitionName = 'slide-right';
         }
+      }
+    },
+    // 自动刷新网页
+    provide() {
+      return {
+        reload: this.reload
+      }
+    },
+    methods: {
+      reload() {
+        this.isRouterAlive = false;
+        this.$nextTick(function () {
+          this.isRouterAlive = true;
+        })
       }
     }
   }

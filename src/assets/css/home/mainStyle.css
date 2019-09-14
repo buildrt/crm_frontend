@@ -1,0 +1,21 @@
+/* 主内容的样式 */
+#showdiv {
+  position: absolute;
+  left: 200px;
+  top: 10%;
+  margin-top: 20px;
+  width: 50%;
+  height: 83%;
+  background-color: white;
+  padding: 10px;
+}
+/* 侧栏的样式 */
+#sidebar {
+  position: absolute;
+  right: 0;
+  top: 10%;
+  margin-top: 20px;
+  background-color: white;
+  width: 34%;
+  height: 83%;
+}
