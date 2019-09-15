@@ -2,7 +2,7 @@
   <div class="tab-bar-item" @click="itemClick">
     <div v-if="!isActive"><slot name="item-icon"></slot></div>
     <div v-else ><slot name="item-icon-active"></slot></div>
-    <div :style="activeStyle"><slot name="item-text"></slot></div>
+    <div :style="activeStyle" id="textDiv"><slot name="item-text"></slot></div>
   </div>
 </template>
 
@@ -45,9 +45,12 @@
 
 <style scoped>
   .tab-bar-item {
+    position: relative;
     text-align: center;
-    height: 60px;
-    font-size: 14px;
+    height: 100%;
+    font-size: 16px;
+    padding-bottom: 10px;
+    margin-right: 20px;
   }
 
   .tab-bar-item img {
@@ -57,7 +60,13 @@
   }
 
   div {
-     display: inline;
-     text-align: center;
+    display: inline;
+    float: left;
    }
+  #textDiv {
+    position: absolute;
+    top: 40%;
+    width: 50px;
+    text-align: center;
+  }
 </style>

@@ -18,5 +18,5 @@
 
 <style scoped>
   /* 主内容的样式 */
-  @import "../../assets/css/home/mainStyle.css";
+  @import "../../../assets/css/home/mainStyle.css";
 </style>

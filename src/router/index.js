@@ -2,8 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 const Home = () => import('../views/home/Home');
-const HomeMission = () => import('../views/home/HomeMission');
+const HomeMission = () => import('../views/home/mission/HomeMission');
 const HomeEcharts = () => import('../views/home/echarts/HomeEcharts');
+const HomeSchedule = () => import('../views/home/schedule/HomeSchedule');
 
 const Register = () => import('../views/register/Register');
 const Login = () => import('../views/login/Login');
@@ -41,6 +42,10 @@ const routes = [
         redirect: 'mission'
       },
       {
+        path: 'schedule',
+        component: HomeSchedule
+      },
+      {
         path: 'mission',
         component: HomeMission
       },
@@ -73,7 +78,7 @@ const router = new VueRouter({
   mode: 'history'
 });
 
-// 全局导航守卫
+//全局导航守卫
 router.beforeEach((to, from, next) => {
   // document.title = to.matched[0].meta.title;
   // next();
