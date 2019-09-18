@@ -1,5 +1,5 @@
 <template>
-  <tab-bar id="tab-bar">
+  <home-tab-bar id="tab-bar">
     <table id="indexItem" cellspacing="1" cellpadding="1" border="1px">
       <thead>
         <tr>
@@ -9,77 +9,71 @@
       <tbody>
       <tr>
         <td>
-          <tab-bar-item path="schedule" id="schedule">
+          <home-tab-bar-item path="schedule" id="schedule">
             <img slot="item-icon" src="~assets/img/home/tabbar/schedule/schedule.svg" alt="">
-            <img slot="item-icon-active" src="~assets/img/home/tabbar/schedule/schedule_active.svg"/>
             <div slot="item-text">日历</div>
-          </tab-bar-item>
+          </home-tab-bar-item>
         </td>
       </tr>
       <tr>
         <td>
-          <tab-bar-item path="mission" id="mission">
+          <home-tab-bar-item path="mission" id="mission">
             <img slot="item-icon" src="~assets/img/home/tabbar/mission/mission.svg" alt="">
-            <img slot="item-icon-active" src="~assets/img/home/tabbar/mission/mission_active.svg"/>
             <div slot="item-text">任务</div>
-          </tab-bar-item>
+          </home-tab-bar-item>
         </td>
       </tr>
       <tr>
         <td>
-          <tab-bar-item path="echarts" id="echarts">
+          <home-tab-bar-item path="echarts" id="echarts">
             <img slot="item-icon" src="~assets/img/home/tabbar/echarts/echarts.svg" alt="">
-            <img slot="item-icon-active" src="~assets/img/home/tabbar/echarts/echarts_active.svg"/>
             <div slot="item-text">图表</div>
-          </tab-bar-item>
+          </home-tab-bar-item>
         </td>
       </tr>
       <tr>
         <td>
-          <tab-bar-item>
+          <home-tab-bar-item>
             <img slot="item-icon" src="~assets/img/tabbar/home/home.svg" alt="">
-            <img slot="item-icon-active" src="~assets/img/tabbar/home/home_active.svg"/>
             <div slot="item-text">日历</div>
-          </tab-bar-item>
+          </home-tab-bar-item>
         </td>
       </tr>
       <tr>
         <td>
-          <tab-bar-item>
+          <home-tab-bar-item>
             <img slot="item-icon" src="~assets/img/tabbar/home/home.svg" alt="">
-            <img slot="item-icon-active" src="~assets/img/tabbar/home/home_active.svg"/>
             <div slot="item-text">任务</div>
-          </tab-bar-item>
+          </home-tab-bar-item>
         </td>
       </tr>
       <tr>
         <td>
-          <tab-bar-item>
+          <home-tab-bar-item>
             <img slot="item-icon" src="~assets/img/tabbar/home/home.svg" alt="">
-            <img slot="item-icon-active" src="~assets/img/tabbar/home/home_active.svg"/>
             <div slot="item-text">图表</div>
-          </tab-bar-item>
+          </home-tab-bar-item>
         </td>
       </tr>
       </tbody>
     </table>
-  </tab-bar>
+  </home-tab-bar>
 </template>
 
 <script>
-  import TabBar from 'components/common/tabbar/TabBar'
-  import TabBarItem from 'components/common/tabbar/TabBarItem'
+  import HomeTabBar from 'components/common/homeTabbar/HomeTabBar'
+  import HomeTabBarItem from 'components/common/homeTabbar/HomeTabBarItem'
 
   export default {
-    name: "HomeTabBar",
+    name: "SideTabBar",
     data() {
       return {
         activeID: 'activeTD'
       }
     },
     components: {
-      TabBar,
-      TabBarItem
+      HomeTabBar,
+      HomeTabBarItem
     },
     methods: {
 
@@ -102,13 +96,11 @@
     width: 100%;
     height: 60%;
   }
-  tbody td {
-    padding-left: 10px;
-  }
   tbody img {
     position: absolute;
     width: 25px;
     height: 25px;
+    left: 23%;
   }
   tbody div {
     position: absolute;
