@@ -1,79 +1,77 @@
 <template>
   <div id="info_reg">
-    <div id="showdiv">
-      <div>
-        <!--<video autoplay loop muted>-->
-          <!--<source src="../../assets/video/loginBac.mp4" type="video/mp4"/>-->
-        <!--</video>-->
-        <img id="bcImg" src="../../assets/img/login/loginBac.jpg" alt="">
-      </div>
+    <div>
+      <!--<video autoplay loop muted>-->
+      <!--<source src="../../assets/video/loginBac.mp4" type="video/mp4"/>-->
+      <!--</video>-->
+      <img id="bcImg" src="../../assets/img/login/loginBac.jpg" alt="">
+    </div>
 
-      <div id="regInfo">
-        <form action="#" method="get" @submit="checkSub">
-          <table>
-            <tr>
-              <td width="80px">用户名:</td>
-              <td width="300px">
-                <input type="text" autocomplete="off" name="uname" id="uname" value="" @blur="checkUname" alt="用户名"/>&nbsp;
-                <span id="unameSpan">*2-4位汉字</span>
-              </td>
-            </tr>
-            <tr>
-              <td>密码:</td>
-              <td>
-                <input type="password" name="pwd" id="pwd" value="" @blur="checkPwd"/>&nbsp;
-                <span id="pwdSpan">*6-20位</span>
-              </td>
-            </tr>
-            <tr>
-              <td>确认密码:</td>
-              <td>
-                <input type="password" name="pwd2" id="pwd2" value="" @blur="checkPwd2"/>&nbsp;
-                <span id="pwd2Span"></span>
-              </td>
-            </tr>
-            <tr>
-              <td>手机号:</td>
-              <td>
-                <input type="text" autocomplete="off" name="phone" id="phone" value="" @blur="checkPhone" alt="手机号"/>&nbsp;
-                <span id="phoneSpan"></span>
-              </td>
-            </tr>
-            <tr>
-              <td>邮箱:</td>
-              <td>
-                <input type="text" autocomplete="off" name="mail" id="mail" value="" @blur="checkMail" alt="邮箱"/>&nbsp;
-                <span id="mailSpan"></span>
-              </td>
-            </tr>
-            <tr>
-              <td>性别:</td>
-              <td>
-                男	<input type="radio" name="sex" id="sex0" value="0" checked="checked"/>&nbsp;&nbsp;&nbsp;
-                女	<input type="radio" name="sex" id="sex1" value="1" />
-              </td>
-            </tr>
-            <tr>
-              <td>验证码:</td>
-              <td>
-                <input type="text" autocomplete="off" name="code" id="code" value="" style="width: 100px;" @blur="checkCode"/>&nbsp;&nbsp;
-                <span id="codeSpan" @click="createCode">{{code}}</span>&nbsp;
-                <span id="codeAppendSpan"></span>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <input type="checkbox" name="" id="agree" value="" @click="checkAgree()"/>&nbsp;&nbsp;相遇即是缘分
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button id="sub" disabled="disabled" @click="checkSub">注 册</button>
-              </td>
-            </tr>
-          </table>
-        </form>
-      </div>
+    <div id="regInfo">
+      <form action="#" method="get" @submit="checkSub">
+        <table>
+          <tr>
+            <td width="80px">用户名:</td>
+            <td width="300px">
+              <input type="text" autocomplete="off" name="uname" id="uname" value="" @blur="checkUname" alt="用户名"/>&nbsp;
+              <span id="unameSpan">*2-4位汉字</span>
+            </td>
+          </tr>
+          <tr>
+            <td>密码:</td>
+            <td>
+              <input type="password" name="pwd" id="pwd" value="" @blur="checkPwd"/>&nbsp;
+              <span id="pwdSpan">*6-20位</span>
+            </td>
+          </tr>
+          <tr>
+            <td>确认密码:</td>
+            <td>
+              <input type="password" name="pwd2" id="pwd2" value="" @blur="checkPwd2"/>&nbsp;
+              <span id="pwd2Span"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>手机号:</td>
+            <td>
+              <input type="text" autocomplete="off" name="phone" id="phone" value="" @blur="checkPhone" alt="手机号"/>&nbsp;
+              <span id="phoneSpan"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>邮箱:</td>
+            <td>
+              <input type="text" autocomplete="off" name="mail" id="mail" value="" @blur="checkMail" alt="邮箱"/>&nbsp;
+              <span id="mailSpan"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>性别:</td>
+            <td>
+              男	<input type="radio" name="sex" id="sex0" value="0" checked="checked"/>&nbsp;&nbsp;&nbsp;
+              女	<input type="radio" name="sex" id="sex1" value="1" />
+            </td>
+          </tr>
+          <tr>
+            <td>验证码:</td>
+            <td>
+              <input type="text" autocomplete="off" name="code" id="code" value="" style="width: 100px;" @blur="checkCode"/>&nbsp;&nbsp;
+              <span id="codeSpan" @click="createCode">{{code}}</span>&nbsp;
+              <span id="codeAppendSpan"></span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="checkbox" name="" id="agree" value="" @click="checkAgree()"/>&nbsp;&nbsp;相遇即是缘分
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button id="sub" disabled="disabled" @click="checkSub">注 册</button>
+            </td>
+          </tr>
+        </table>
+      </form>
     </div>
   </div>
 </template>

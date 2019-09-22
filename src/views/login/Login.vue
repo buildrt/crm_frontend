@@ -1,41 +1,36 @@
 <template>
   <div id="login">
-    <div id="showdiv">
-      <div>
-        <!--<video autoplay loop muted>-->
-          <!--<source src="../../assets/video/loginBac.mp4" type="video/mp4"/>-->
-        <!--</video>-->
-        <img id="bcImg" src="../../assets/img/login/loginBac.jpg" alt="">
-      </div>
+    <div>
+      <img id="bcImg" src="../../assets/img/login/loginBac.jpg" alt="">
+    </div>
 
-      <div class="info">
-        <div id="title">
-          <!-- 用图片代替文字 -->
-          <img src="" alt="">
-        </div>
-        <form class="loginInfo" action="#" method="get" @submit.prevent>
-          <table>
-            <tr>
-              <td>
-                <img id="userImg" src="../../assets/img/login/userImg.svg" alt="">
-                <input type="text" v-model="username" autocomplete="off" class="username" name="username" id="username" onFocus="this.value=''" value="请输入用户名"/>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img id="pwdImg" src="../../assets/img/login/pwdImg.svg" alt="">
-                <input type="password" v-model="password" class="pwd" onFocus="this.value=''" value="*******" name="pwd" id="pwd">
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button class="send" id="send" @click="Login">登  录</button>
-                <router-link to="/register" tag="button">注   册</router-link>
-              </td>
-            </tr>
-          </table>
-        </form>
+    <div class="info">
+      <div id="title">
+        <!-- 用图片代替文字 -->
+        <img src="" alt="">
       </div>
+      <form class="loginInfo" action="#" method="get" @submit.prevent>
+        <table>
+          <tr>
+            <td>
+              <img id="userImg" src="../../assets/img/login/userImg.svg" alt="">
+              <input type="text" v-model="username" autocomplete="off" class="username" name="username" id="username" onFocus="this.value=''" value="请输入用户名"/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img id="pwdImg" src="../../assets/img/login/pwdImg.svg" alt="">
+              <input type="password" v-model="password" class="pwd" onFocus="this.value=''" value="*******" name="pwd" id="pwd">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button class="send" id="send" @click="Login">登  录</button>
+              <router-link to="/register" tag="button">注   册</router-link>
+            </td>
+          </tr>
+        </table>
+      </form>
     </div>
   </div>
 </template>
@@ -89,7 +84,7 @@
       }
     },
     mounted() {
-      this.reload()    // 调用自动刷新的方法,避免注销登录时，登录界面加载问题
+      this.reload();    // 调用自动刷新的方法,避免注销登录时，登录界面加载问题
     }
   }
 </script>

@@ -6,6 +6,9 @@ const HomeMission = () => import('../views/home/mission/HomeMission');
 const HomeEcharts = () => import('../views/home/echarts/HomeEcharts');
 const HomeSchedule = () => import('../views/home/schedule/HomeSchedule');
 
+const Client = () => import('../views/client/Client');
+const ClientInfo = () => import('../views/client/clientInfo/ClientInfo');
+
 const Register = () => import('../views/register/Register');
 const Login = () => import('../views/login/Login');
 const Profile = () => import('../views/profile/Profile');
@@ -52,6 +55,24 @@ const routes = [
       {
         path: 'echarts',
         component: HomeEcharts
+      }
+    ]
+  },
+  {
+    path: '/client',
+    component: Client,
+    meta: {
+      title: '客户管理',
+      index: 1
+    },
+    children: [
+      {
+        path: '',
+        redirect: 'clientInfo'
+      },
+      {
+        path: 'clientInfo',
+        component: ClientInfo
       }
     ]
   },

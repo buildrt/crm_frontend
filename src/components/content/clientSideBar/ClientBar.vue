@@ -2,30 +2,30 @@
   <home-tab-bar id="tab-bar">
     <table id="indexItem">
       <thead>
-        <tr>
-          <th>表格标题</th>
-        </tr>
+      <tr>
+        <th>表格标题</th>
+      </tr>
       </thead>
       <tbody>
       <tr>
         <td>
-          <home-tab-bar-item path="schedule" id="schedule">
+          <home-tab-bar-item id="schedule">
             <img slot="item-icon" src="~assets/img/home/tabbar/schedule/schedule.svg" alt="">
-            <div slot="item-text">日历</div>
+            <div slot="item-text">联系人</div>
           </home-tab-bar-item>
         </td>
       </tr>
       <tr>
         <td>
-          <home-tab-bar-item path="mission" id="mission">
+          <home-tab-bar-item path="clientInfo" id="mission">
             <img slot="item-icon" src="~assets/img/home/tabbar/mission/mission.svg" alt="">
-            <div slot="item-text">任务</div>
+            <div slot="item-text">客户</div>
           </home-tab-bar-item>
         </td>
       </tr>
       <tr>
         <td>
-          <home-tab-bar-item path="echarts" id="echarts">
+          <home-tab-bar-item id="echarts">
             <img slot="item-icon" src="~assets/img/home/tabbar/echarts/echarts.svg" alt="">
             <div slot="item-text">图表</div>
           </home-tab-bar-item>
@@ -61,17 +61,13 @@
 </template>
 
 <script>
-  import HomeTabBar from 'components/common/homeTabbar/HomeTabBar'
-  import HomeTabBarItem from 'components/common/homeTabbar/HomeTabBarItem'
-
+  import HomeTabBar from "../../common/homeTabbar/HomeTabBar";
+  import HomeTabBarItem from '../../../components/common/homeTabbar/HomeTabBarItem'
   export default {
-    name: "SideTabBar",
+    name: "ClientBar",
     components: {
       HomeTabBar,
       HomeTabBarItem
-    },
-    methods: {
-
     }
   }
 </script>

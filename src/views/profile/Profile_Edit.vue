@@ -11,7 +11,7 @@
               <input type="text" name="name" id="iname" :value="dname">
             </td>
             <td>
-              <label for="igender">性别</label>
+              <label>性别</label>
             </td>
             <td>
               <select name="gender" id="igender">

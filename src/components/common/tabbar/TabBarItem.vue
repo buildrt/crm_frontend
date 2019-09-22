@@ -66,7 +66,7 @@
   #textDiv {
     position: absolute;
     top: 40%;
-    width: 50px;
+    width: 80px;
     text-align: center;
   }
 </style>

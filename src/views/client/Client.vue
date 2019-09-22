@@ -1,23 +1,23 @@
 <template>
-  <div id="homepage">
-    <side-tab-bar></side-tab-bar>
+  <div id="clientpage">
+    <client-bar></client-bar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import SideTabBar from '../../components/content/sideTabbar/SideTabBar'
+  import ClientBar from '../../components/content/clientSideBar/ClientBar'
 
   export default {
-    name: "Home",
+    name: "Client",
     components: {
-      SideTabBar,
+      ClientBar,
     }
   }
 </script>
 
 <style scoped>
-  #homepage {
+  #clientpage {
     margin-top: 20px;
   }
 </style>

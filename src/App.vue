@@ -3,7 +3,7 @@
     <main-tab-bar></main-tab-bar>
     <transition :name="transitionName">
       <keep-alive>
-        <router-view></router-view>
+        <router-view v-if="isRouterAlive"></router-view>
       </keep-alive>
     </transition>
   </div>
