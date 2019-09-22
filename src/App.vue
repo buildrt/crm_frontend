@@ -11,7 +11,7 @@
 
 <script>
   import MainTabBar from "./components/content/mainTabbar/MainTabBar";
-
+  import 'element-ui/lib/theme-chalk/index.css';
   export default {
     name: 'app',
     components: {
