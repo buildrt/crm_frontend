@@ -169,18 +169,17 @@
           return false;
         }else if(regStrong.test(pwd)){
           //输出校验结果
-          //span.innerHTML="*密码强度高";
-          span.innerHTML="*密码强度高<div style='position: absolute;right: 80px; top: 59px; border: solid 1px gray; width: 60px;height: 8px; border-radius: 5px;'><div style='border: solid 1px green; margin: 1px; width: 56px;height: 4px; border-radius: 5px; background: green;'></div></div>";
+          span.innerHTML="*密码强度高";
           span.style.color="green";
           return true;
         }else if(regMid.test(pwd)){
           //输出校验结果
-          span.innerHTML="*密码强度中<div style='position: absolute;right: 80px; top: 59px; border: solid 1px gray; width: 60px;height: 8px; border-radius: 5px;float: left;'><div style='border: solid 1px #FFB90F; margin: 1px; width: 60%;height: 4px; border-radius: 5px; background: #FFB90F;'></div></div>";
+          span.innerHTML="*密码强度中";
           span.style.color="#FFB90F";
           return true;
         }else if(regWeek.test(pwd)){
           //输出校验结果
-          span.innerHTML="*密码强度弱<div style='position: absolute;right: 80px; top: 59px; border: solid 1px gray; width: 60px;height: 8px; border-radius: 5px;float: left;'><div style='border: solid 1px red; margin: 1px; width: 30%;height: 4px; border-radius: 5px; background: red;'></div></div>";
+          span.innerHTML="*密码强度低";
           span.style.color="red";
           return false;
         }else{
