@@ -66,4 +66,8 @@
     top: 18%;
     overflow-y: hidden;
   }
+  .el-menu-item i {
+    margin-right: 15px;
+    margin-left: 10px;
+  }
 </style>
