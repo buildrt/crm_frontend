@@ -8,6 +8,9 @@ const HomeSchedule = () => import('../views/home/schedule/HomeSchedule');
 
 const Client = () => import('../views/client/Client');
 const ClientInfo = () => import('../views/client/clientInfo/ClientInfo');
+const Contacts = () => import('../views/client/contacts/Contacts');
+
+const Analysis = () => import('../views/analysis/Analysis');
 
 const Register = () => import('../views/register/Register');
 const Login = () => import('../views/login/Login');
@@ -73,8 +76,20 @@ const routes = [
       {
         path: 'clientInfo',
         component: ClientInfo
+      },
+      {
+        path: 'contacts',
+        component: Contacts
       }
     ]
+  },
+  {
+    path: '/analysis',
+    component: Analysis,
+    meta: {
+      title: '数据分析',
+      index: 1
+    }
   },
   {
     path: '/register',

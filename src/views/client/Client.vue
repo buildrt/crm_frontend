@@ -1,5 +1,5 @@
 <template>
-  <div id="clientpage">
+  <div id="clientPage">
     <client-bar></client-bar>
     <router-view></router-view>
   </div>
@@ -17,7 +17,7 @@
 </script>
 
 <style scoped>
-  #clientpage {
+  #clientPage {
     margin-top: 20px;
   }
 </style>

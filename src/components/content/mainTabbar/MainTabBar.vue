@@ -12,7 +12,7 @@
       <div slot="item-text">客户管理</div>
     </tab-bar-item>
 
-    <tab-bar-item path="" id="data">
+    <tab-bar-item path="/analysis" id="data">
       <img slot="item-icon" src="~assets/img/tabbar/home/home.svg" alt="">
       <img slot="item-icon-active" src="~assets/img/tabbar/home/home_active.svg"/>
       <div slot="item-text">数据分析</div>
