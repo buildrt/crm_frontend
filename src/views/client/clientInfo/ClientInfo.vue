@@ -94,6 +94,8 @@
 </template>
 
 <script>
+  import {request} from "../../../network/request";
+
   export default {
     name: "ClientInfo",
     methods: {
@@ -104,108 +106,41 @@
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
         this.currpage=val;
+      },
+      getClientData() {
+        request({
+          url: '/tableInfo'
+        }).then(res => {
+          let clientData = res.data;
+          let data = [];
+          let len = clientData.length;
+          // console.log(clientData);
+          for (let i=0; i<len; i++ ){
+            let obj = {};
+            obj.cname = clientData[i].cname;
+            obj.rank = clientData[i].rank;
+            obj.source = clientData[i].source;
+            obj.chargeMan = clientData[i].chargeMan;
+            obj.updateTime = clientData[i].updateTime;
+            obj.status = clientData[i].status;
+            obj.createTime = clientData[i].createTime;
+            obj.remark = clientData[i].remark;
+            obj.nextTime = clientData[i].nextTime;
+            obj.phone = clientData[i].phone;
+            data[i] = obj;
+          }
+          this.clientData = data;
+        }).catch(error => {
+          console.log("数据获取失败");
+        })
       }
+    },
+    created(){
+      this.getClientData();
     },
     data() {
       return {
-        clientData : [
-          {
-            cname: '四川特色火锅料理有限公司',
-            rank: 'B（普通客户）',
-            source: '招商资源',
-            chargeMan: '悟空',
-            updateTime: '2019-09-23 18:15:00',
-            status: '未成交',
-            createTime: '2019-03-04 18:21:48',
-            remark: '--',
-            nextTime: '2019-03-05 13:00:00',
-            phone: '19090902210',
-          },
-          {
-            cname: '云南能投物流有限责任公司',
-            rank: 'A（重点客户）',
-            source: '招商资源',
-            chargeMan: '悟空',
-            updateTime: '2019-09-23 15:54:58',
-            status: '未成交',
-            createTime: '2019-03-07 10:32:40\n',
-            remark: '--',
-            nextTime: '2019-03-05 13:00:00',
-            phone: '18535440268',
-          },
-          {
-            cname: '上海能投物流有限责任公司',
-            rank: 'A（重点客户）',
-            source: '招商资源',
-            chargeMan: '悟空',
-            updateTime: '2019-09-23 15:54:58',
-            status: '未成交',
-            createTime: '2019-03-07 10:32:40\n',
-            remark: '--',
-            nextTime: '2019-03-05 13:00:00',
-            phone: '18535440268',
-          },
-          {
-            cname: '北京能投物流有限责任公司',
-            rank: 'A（重点客户）',
-            source: '招商资源',
-            chargeMan: '悟空',
-            updateTime: '2019-09-23 15:54:58',
-            status: '未成交',
-            createTime: '2019-03-07 10:32:40\n',
-            remark: '--',
-            nextTime: '2019-03-05 13:00:00',
-            phone: '18535440268',
-          },
-          {
-            cname: '南京能投物流有限责任公司',
-            rank: 'B（普通客户）',
-            source: '招商资源',
-            chargeMan: '悟空',
-            updateTime: '2019-09-23 15:54:58',
-            status: '未成交',
-            createTime: '2019-03-07 10:32:40\n',
-            remark: '--',
-            nextTime: '2019-03-05 13:00:00',
-            phone: '18535440268',
-          },
-          {
-            cname: '成都能投物流有限责任公司',
-            rank: 'A（重点客户）',
-            source: '招商资源',
-            chargeMan: '悟空',
-            updateTime: '2019-09-23 15:54:58',
-            status: '未成交',
-            createTime: '2019-03-07 10:32:40\n',
-            remark: '--',
-            nextTime: '2019-03-05 13:00:00',
-            phone: '18535440268',
-          },
-          {
-            cname: '重庆能投物流有限责任公司',
-            rank: 'B（普通客户）',
-            source: '招商资源',
-            chargeMan: '悟空',
-            updateTime: '2019-09-23 15:54:58',
-            status: '未成交',
-            createTime: '2019-03-07 10:32:40\n',
-            remark: '--',
-            nextTime: '2019-03-05 13:00:00',
-            phone: '18535440268',
-          },
-          {
-            cname: '天津能投物流有限责任公司',
-            rank: 'A（重点客户）',
-            source: '招商资源',
-            chargeMan: '悟空',
-            updateTime: '2019-09-23 15:54:58',
-            status: '未成交',
-            createTime: '2019-03-07 10:32:40\n',
-            remark: '--',
-            nextTime: '2019-03-05 13:00:00',
-            phone: '18535440268',
-          },
-        ],
+        clientData: [],
         pagesize: 8,  // 每页的数据数
         currpage: 1,  // 默认开始页面
       }

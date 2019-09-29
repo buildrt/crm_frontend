@@ -4,6 +4,8 @@
       <img id="bcImg" src="../../assets/img/login/loginBac.jpg" alt="">
     </div>
 
+    <router-link to="/carousel" tag="button">界   面</router-link>
+
     <div class="info">
       <div id="title">
         <!-- 用图片代替文字 -->
@@ -69,8 +71,7 @@
             if (passWordArr[index] === this.password) {
               // 把token放在sessionStorage中
               ses.setItem('data', resData[index].token);
-
-              alert('登录成功');
+               alert('登录成功');
               // 跳转到首页
               this.$router.push('/home');
               this.$store.commit('loginJudgeChange'); //改变loginJudge参数，使Profile界面显示出来

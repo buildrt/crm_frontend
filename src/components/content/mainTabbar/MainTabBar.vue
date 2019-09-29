@@ -1,5 +1,5 @@
 <template>
-  <tab-bar>
+  <tab-bar v-if="!$store.state.loginJudge">
     <tab-bar-item path="/home" id="homepage">
       <img slot="item-icon" src="~assets/img/tabbar/home/home.svg" alt="">
       <img slot="item-icon-active" src="~assets/img/tabbar/home/home_active.svg"/>
@@ -16,6 +16,12 @@
       <img slot="item-icon" src="~assets/img/tabbar/home/home.svg" alt="">
       <img slot="item-icon-active" src="~assets/img/tabbar/home/home_active.svg"/>
       <div slot="item-text">数据分析</div>
+    </tab-bar-item>
+
+    <tab-bar-item path="carousel" id="carousel" v-if="$store.state.loginJudge">
+      <img slot="item-icon" src="~assets/img/tabbar/home/home.svg" alt="">
+      <img slot="item-icon-active" src="~assets/img/tabbar/home/home_active.svg"/>
+      <div slot="item-text">界面</div>
     </tab-bar-item>
 
     <tab-bar-item path="/login" id="login" v-if="$store.state.loginJudge">
@@ -66,14 +72,18 @@
   }
   #register {
     position: relative;
-    left: 74%;
+    left: 70%;
   }
   #login {
     position: relative;
-    left: 72%;
+    left: 68%;
   }
   #profile {
     position: relative;
-    left: 73%;
+    left: 69%;
+  }
+  #carousel {
+    position: relative;
+    left: 50%;
   }
 </style>

@@ -13,6 +13,11 @@
 <script>
   export default {
     name: "HomeEcharts",
+    data() {
+      return {
+
+      }
+    },
     mounted() {
       this.drawLine();
     },

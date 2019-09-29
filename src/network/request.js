@@ -3,7 +3,7 @@ import axios from 'axios'
 export function request(config) {
   // 1.创建axios实例
   const instance = axios.create({
-     baseURL: 'https://easy-mock.com/mock/5d71093f8c7905637ab58fb5/test',
+     baseURL: 'http://127.0.0.1:7300/mock/5d905150f5149920d0b56225/test',
      timeout: 5000
   });
 
