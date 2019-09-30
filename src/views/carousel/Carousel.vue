@@ -1,8 +1,8 @@
 <template>
   <div id="carousel">
     <el-carousel :interval="5000" arrow="always" loop>
-      <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
+      <el-carousel-item v-for="item in titleImg" :key="item">
+        <el-image :src="item.img"></el-image>
       </el-carousel-item>
     </el-carousel>
 
@@ -13,10 +13,19 @@
 </template>
 
 <script>
+  import title1 from '../../assets/img/carousel/title1.png'
+  import title2 from '../../assets/img/carousel/title2.png'
+  import title3 from '../../assets/img/carousel/title3.jpeg'
   export default {
     name: "Carousel",
-    methods: {
-     
+    data() {
+      return {
+        titleImg: [
+          {img: title1},
+          {img: title2},
+          {img: title3}
+        ]
+      }
     }
   }
 </script>
@@ -28,6 +37,8 @@
     left: 0;
     right: 0;
     width: 100%;
+    height: 120%;
+    background-color: black;
   }
   .el-carousel {
     position: relative;

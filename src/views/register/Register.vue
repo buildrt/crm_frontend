@@ -1,11 +1,8 @@
 <template>
   <div id="info_reg">
-    <div>
-      <!--<video autoplay loop muted>-->
-      <!--<source src="../../assets/video/loginBac.mp4" type="video/mp4"/>-->
-      <!--</video>-->
-      <img id="bcImg" src="../../assets/img/login/loginBac.jpg" alt="">
-    </div>
+    <video loop="loop" autoplay="autoplay" width="100%" muted="muted">
+      <source src="../../assets/img/login/loginBac.mp4" type="video/mp4"/>
+    </video>
 
     <div id="regInfo">
       <form action="#" method="get" @submit="checkSub">
@@ -286,6 +283,14 @@
 <style scoped>
   @import "../../assets/css/login_register/showdiv.css";
 
+  #info_reg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
   #regInfo {
     position: absolute;
     top: 13%;

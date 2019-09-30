@@ -1,10 +1,11 @@
 <template>
   <div id="login">
-    <div>
-      <img id="bcImg" src="../../assets/img/login/loginBac.jpg" alt="">
-    </div>
+    <!--<img id="bcImg" src="../../assets/img/login/loginBac.jpg" alt="">-->
+    <video loop="loop" autoplay="autoplay" width="100%" muted="muted">
+      <source src="../../assets/img/login/loginBac.mp4" type="video/mp4"/>
+    </video>
 
-    <router-link to="/carousel" tag="button">界   面</router-link>
+    <router-link to="/carousel" tag="button" id="CarRoute">界   面</router-link>
 
     <div class="info">
       <div id="title">
@@ -93,6 +94,20 @@
 <style scoped>
   @import "../../assets/css/login_register/showdiv.css";
 
+  #login {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  #CarRoute {
+    position: absolute;
+    top: 10%;
+    left: 0;
+  }
   .info{
     position: absolute;
     top: 20%;

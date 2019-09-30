@@ -25,7 +25,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '',
-    redirect: './login'
+    redirect: './carousel'
   },
   {
     path: '/carousel',
