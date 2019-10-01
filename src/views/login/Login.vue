@@ -73,6 +73,7 @@
               // 把token放在sessionStorage中
               ses.setItem('data', resData[index].token);
                alert('登录成功');
+               //this.$message('登录成功');
               // 跳转到首页
               this.$router.push('/home');
               this.$store.commit('loginJudgeChange'); //改变loginJudge参数，使Profile界面显示出来
@@ -86,6 +87,7 @@
       }
     },
     mounted() {
+      console.log("login--mounted");
       this.reload();    // 调用自动刷新的方法,避免注销登录时，登录界面加载问题
     }
   }
