@@ -94,7 +94,7 @@
 </template>
 
 <script>
-  import {request} from "../../../network/request";
+  import axios from "../../../network/axios";
 
   export default {
     name: "ClientInfo",
@@ -108,7 +108,7 @@
         this.currpage=val;
       },
       getClientData() {
-        request({
+        axios({
           url: '/tableInfo'
         }).then(res => {
           let clientData = res.data;

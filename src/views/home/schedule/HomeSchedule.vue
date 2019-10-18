@@ -19,7 +19,7 @@
 
 <script>
   import Loading from '../../../components/loading/Loading'
-  import {request} from "../../../network/request";
+  import {request} from "../../../network/axios";
 
   export default {
     name: "HomeSchedule",
