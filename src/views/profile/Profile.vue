@@ -81,8 +81,8 @@
         //console.log(window.sessionStorage,'before');
         window.sessionStorage.removeItem('data');
         //console.log(window.sessionStorage,'after');
-        this.$store.commit('loginJudgeChange');  //改变loginJudge参数，使Login和Register界面显示出来
-        this.$router.push('/login');
+        this.$store.state.loginJudge = false;
+        this.$router.replace('/login');
       }
     }
   }

@@ -12,7 +12,6 @@
 <script>
   import MainTabBar from "./components/content/mainTabbar/MainTabBar";
   import 'element-ui/lib/theme-chalk/index.css';
-  import MenuTabBar from "./components/content/menuTabbar/MenuTabBar"
   import 'vue-event-calendar/dist/style.css'
   import Carousel from "./views/carousel/Carousel";
   export default {
@@ -20,7 +19,6 @@
     components: {
       Carousel,
       MainTabBar,
-      MenuTabBar
     },
     data() {
       return {

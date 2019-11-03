@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index'
 
 const Home = () => import('../views/home/Home');
 const HomeMission = () => import('../views/home/mission/HomeMission');
@@ -25,7 +26,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '',
-    redirect: './carousel'
+    redirect: './login'
   },
   {
     path: '/carousel',
@@ -48,7 +49,6 @@ const routes = [
     component: Home,
     meta: {
       title: '首页',
-      needLogin: true,   // 判断每次路由跳转的链接是否需要登录
       index: 1,          // 判断页面是否添加动画
     },
     children: [
@@ -113,7 +113,6 @@ const routes = [
     component: Profile,
     meta: {
       title: '个人空间',
-      needLogin: true
     }
   },
 
@@ -121,19 +120,18 @@ const routes = [
 
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'hash'
 });
 
 //全局导航守卫
 router.beforeEach((to, from, next) => {
   // document.title = to.matched[0].meta.title;
   // next();
-
-  //路由中设置的needLogin字段就在to当中
-  if (window.sessionStorage.data) {
-    console.log(window.sessionStorage);
-    if (to.path === '/login') {
-      // 在已经登录状态下，访问Login.vue页面 会跳到Home.vue
+  // console.log(store.getters.isLogin);
+  if(store.getters.isLogin === true) {
+    console.log(store.getters.isLogin);
+    if (to.path === '/login' || to.path === '/register' || to.path === '/carousel') {
+      //在已经登录状态下，访问Login.vue页面 会跳到Home.vue
       document.title = to.matched[0].meta.title;
       next({
         path: '/home'
@@ -143,7 +141,6 @@ router.beforeEach((to, from, next) => {
       next();
     }
   }else {
-    // 如果没有session ,访问任何页面。都会进入到 登录页
     if (to.path === '/login' || to.path === '/register' || to.path === '/carousel') {  // 如果是登录页面的话，直接next()
       document.title = to.matched[0].meta.title;
       next();

@@ -12,7 +12,7 @@ Vue.config.productionTip = false;
 Vue.use(animated);
 Vue.use(Element, { size: 'small', zIndex: 3000 });
 
-Vue.use(VueEventCalendar, {locale: 'zh'})
+Vue.use(VueEventCalendar, {locale: 'zh'});
 
 new Vue({
   render: h => h(App),

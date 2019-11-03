@@ -1,32 +1,28 @@
 <template>
   <div id="info_reg">
-    <video loop="loop" autoplay="autoplay" width="100%" muted="muted">
-      <source src="../../assets/img/login/loginBac.mp4" type="video/mp4"/>
-    </video>
-
     <div id="regInfo">
       <el-form :model="regForm" :rules="regRules" ref="regForm" label-position="left">
-        <el-form-item prop="username">
-          <el-input class="regInput" id="uname" size="large" v-model.trim="regForm.username" autocomplete="off" placeholder="用户名"></el-input>
+        <el-form-item prop="username" id="userItem">
+          <el-input class="regInput" prefix-icon="el-icon-user" id="uname" size="large" v-model.trim="regForm.username" autocomplete="off" placeholder="用户名"></el-input>
         </el-form-item>
         <el-form-item prop="phone">
-          <el-input class="regInput" id="phone" size="large" v-model.trim="regForm.phone" autocomplete="off" placeholder="手机号码"></el-input>
+          <el-input class="regInput" prefix-icon="el-icon-mobile-phone" id="phone" size="large" v-model.trim="regForm.phone" autocomplete="off" placeholder="手机号码"></el-input>
         </el-form-item>
-        <el-form-item prop="gender">
-          <el-radio-group v-model="regForm.gender" id="gender" size="medium">
-            <el-radio-button :label=0 border @click="RadioOnClick0">男</el-radio-button>
-            <el-radio-button :label=1 border @click="RadioOnClick1">女</el-radio-button>
+        <el-form-item prop="gender" id="genderItem">
+          <el-radio-group v-model="regForm.gender" id="gender" size="mini">
+            <el-radio label='0' @click="RadioOnClick0">男</el-radio>
+            <el-radio label='1' @click="RadioOnClick1">女</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input class="regInput" id="pwd" type="password" size="large" v-model.trim="regForm.password" show-password autocomplete="off" placeholder="密码"></el-input>
+          <el-input class="regInput" prefix-icon="el-icon-lock" id="pwd" type="password" size="large" v-model.trim="regForm.password" show-password autocomplete="off" placeholder="密码"></el-input>
         </el-form-item>
         <el-form-item prop="password2">
-          <el-input class="regInput" id="pwd2" type="password" size="large" v-model.trim="regForm.password2" show-password autocomplete="off" placeholder="确认密码"></el-input>
+          <el-input class="regInput" prefix-icon="el-icon-lock" id="pwd2" type="password" size="large" v-model.trim="regForm.password2" show-password autocomplete="off" placeholder="确认密码"></el-input>
         </el-form-item>
         <el-form-item id="subItem">
-          <el-button type="primary" @click="Register('regForm')">注册</el-button>
-          <el-button type="primary" @click="ToLogin">登录</el-button>
+          <el-button type="primary" round @click="Register('regForm')">注册</el-button>
+          <el-button type="primary" round @click="ToLogin">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -125,17 +121,20 @@
       RadioOnClick1() {
         this.data().regForm.gender = 1;
       },
+    },
+    mounted() {
     }
   }
 </script>
 
 <style>
   .regInput .el-input__inner {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0);
     border: none;
     color: #fff;
     font-size: 16px;
     border-radius: 5px;
+    margin-left: 12px;
   }
 </style>
 
@@ -148,23 +147,46 @@
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: #242645;
     overflow: hidden;
   }
   #regInfo {
     position: absolute;
-    top: 13%;
-    left: 30%;
-    width: 40%;
-    height: 83%;
+    top: 8%;
+    left: 36%;
+    width: 28%;
+    height: 85%;
     padding-left: 4%;
-    background-color: rgba(0,0,0,0.5);
-    border-radius: 25px;
-    box-shadow: 10px 10px 5px rgba(0,0,0,0.3);
+    background: linear-gradient(230deg, rgba(53, 57, 74, 0) 0%, rgb(0, 0, 0) 100%);
+    box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
   }
   .el-form {
-    position: absolute;
+    position: relative;
     top: 25%;
-    width: 60%;
-    left: 20%;
+    width: 80%;
+    height: 70%;
+  }
+  .el-input {
+    font-size: 20px;
+  }
+  #userItem {
+    position: relative;
+    left: 0;
+    text-align: center;
+  }
+  #genderItem {
+    position: relative;
+    left: 10px;
+  }
+  #subItem .el-button {
+    width: 35%;
+    font-size: 16px;
+    color: #409EFF;
+    margin-left: 13%;
+    border: 2px solid;
+    background-color: rgba(0,0,0,0);
+  }
+  .el-radio {
+    color: white;
   }
 </style>

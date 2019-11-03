@@ -1,5 +1,5 @@
 <template>
-  <tab-bar v-if="!$store.state.loginJudge">
+  <tab-bar v-if="$store.state.loginJudge">
     <tab-bar-item path="/home" id="homepage">
       <img slot="item-icon" src="~assets/img/tabbar/home/home.svg" alt="">
       <img slot="item-icon-active" src="~assets/img/tabbar/home/home_active.svg"/>
@@ -24,19 +24,19 @@
       <div slot="item-text">界面</div>
     </tab-bar-item>
 
-    <tab-bar-item path="/login" id="login" v-if="$store.state.loginJudge">
+    <tab-bar-item path="/login" id="login" v-if="!$store.state.loginJudge">
       <img slot="item-icon" src="~assets/img/tabbar/login/login.svg" alt="">
       <img slot="item-icon-active" src="~assets/img/tabbar/login/login_active.svg"/>
       <div slot="item-text">登录</div>
     </tab-bar-item>
 
-    <tab-bar-item path="/register" id="register" v-if="$store.state.loginJudge">
+    <tab-bar-item path="/register" id="register" v-if="!$store.state.loginJudge">
       <img slot="item-icon" src="~assets/img/tabbar/register/register.svg" alt="">
       <img slot="item-icon-active" src="~assets/img/tabbar/register/register_active.svg" alt="">
       <div slot="item-text">注册</div>
     </tab-bar-item>
 
-    <tab-bar-item path="/profile" id="profile" v-if="!$store.state.loginJudge">
+    <tab-bar-item path="/profile" id="profile" v-if="$store.state.loginJudge">
       <img slot="item-icon" src="~assets/img/tabbar/profile/profile.svg" alt="">
       <img slot="item-icon-active" src="~assets/img/tabbar/profile/profile_active.svg" alt="">
       <div slot="item-text">我的</div>
