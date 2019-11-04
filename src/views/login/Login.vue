@@ -4,27 +4,41 @@
     <!--<img id="bcImg" src="../../assets/img/login/loginBac.jpg" alt="">-->
     <router-link to="/carousel" tag="button" id="CarRoute">界   面</router-link>
 
-    <div class="info">
-      <div id="title">
-        <!-- 用图片代替文字 -->
-        <img src="" alt="">
+    <transition name="el-zoom-in-bottom">
+      <div class="info" v-show="formShow">
+        <div id="title">
+          <!-- 用图片代替文字 -->
+          <img src="" alt="">
+        </div>
+        <el-form :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
+          <el-form-item id="nameItem"  prop="username">
+            <el-input class="loginInput" prefix-icon="el-icon-user" id="uname" size="large" v-model.trim="loginForm.username" autocomplete="off" placeholder="用户名"></el-input>
+          </el-form-item>
+          <el-form-item id="pwdItem"  prop="password">
+            <el-input class="loginInput" prefix-icon="el-icon-lock" id="pwd" type="password" size="large" v-model.trim="loginForm.password" show-password autocomplete="off" placeholder="密码"></el-input>
+          </el-form-item>
+          <el-form-item id="subItem">
+            <el-button type="primary" round @click="Login('loginForm')">登录</el-button>
+            <el-button type="primary" round @click="ToRegister">注册</el-button>
+          </el-form-item>
+        </el-form>
+        <div id="foot">
+          <p>欢迎登录CRM管理系统</p>
+        </div>
       </div>
-      <el-form :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
-        <el-form-item id="nameItem"  prop="username">
-          <el-input class="loginInput" prefix-icon="el-icon-user" id="uname" size="large" v-model.trim="loginForm.username" autocomplete="off" placeholder="用户名"></el-input>
-        </el-form-item>
-        <el-form-item id="pwdItem"  prop="password">
-          <el-input class="loginInput" prefix-icon="el-icon-lock" id="pwd" type="password" size="large" v-model.trim="loginForm.password" show-password autocomplete="off" placeholder="密码"></el-input>
-        </el-form-item>
-        <el-form-item id="subItem">
-          <el-button type="primary" round @click="Login('loginForm')">登录</el-button>
-          <el-button type="primary" round @click="ToRegister">注册</el-button>
-        </el-form-item>
-      </el-form>
-      <div id="foot">
-        <p>欢迎登录CRM管理系统</p>
+    </transition>
+    <transition name="slide-fade">
+      <div id="confirm" v-show="confirmShow">
+        <img id="rolling" src="../../assets/img/login/Rolling.gif" alt="">
+        <p>正在认证中...</p>
       </div>
-    </div>
+    </transition>
+    <transition name="el-zoom-in-bottom">
+      <div id="result" v-show="resultShow">
+        <p>登录成功</p>
+        <p>欢迎你XXX</p>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -35,6 +49,9 @@
     name: "Login",
     data(){
       return {
+        formShow: true,
+        resultShow: false,
+        confirmShow: false,
         loginForm: {
           username: '',
           password: '',
@@ -57,6 +74,23 @@
             this.username = document.getElementById('uname').value;
             this.password = document.getElementById('pwd').value;
             console.log(this.username, this.password);
+            this.formShow = false;
+            this.confirmShow = true;
+            setTimeout(() => {
+              this.confirmShow = false;
+              if (1 === 2) {
+                setTimeout(() => {
+                  this.resultShow = true;
+                },300)
+              } else {
+                setTimeout(() => {
+                  this.formShow = true;
+                  this.$alert('用户名密码错误', {
+                    confirmButtonText: '确定',
+                  });
+                },300)
+              }
+            },3000);
             // login(this.username, this.password).then(res => {
             //   console.log(res);
             //   if (res === 1) {
@@ -69,8 +103,8 @@
             //   alert("登录失败");
             //   console.log(err);
             // })
-            this.$store.state.loginJudge = true;
-            this.$router.push('/home');
+            // this.$store.state.loginJudge = true;
+            // this.$router.push('/home');
           }
         })
       },
@@ -188,7 +222,7 @@
     },
     mounted() {
       console.log("login--mounted");
-      this.canvas();
+      // this.canvas();
     },
   }
 </script>
@@ -213,7 +247,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0);
+    background-color: #242645;
     overflow: hidden;
   }
   #canvas {
@@ -286,5 +320,60 @@
     margin-left: 13%;
     border: 2px solid;
     background-color: rgba(0,0,0,0);
+  }
+  #confirm {
+    position: absolute;
+    top: 30%;
+    left: 42%;
+    width: 497px;
+    height: 308px;
+    /*padding-left: 4%;*/
+    background: linear-gradient(230deg, rgba(53, 57, 74, 0) 0%, rgb(0, 0, 0) 100%);
+    box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
+  }
+  #confirm p {
+    position: absolute;
+    top: 38%;
+    left: 35%;
+    font-size: 26px;
+    color: white;
+  }
+  #confirm #rolling {
+    position: absolute;
+    top: 10%;
+    left: 8%;
+    width: 60px;
+  }
+  .slide-fade-enter-active {
+    transition: all 2s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter{
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  .slide-fade-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  #result {
+    position: absolute;
+    top: 8%;
+    left: 36%;
+    width: 28%;
+    height: 85%;
+    /*padding-left: 4%;*/
+    background: linear-gradient(230deg, rgba(53, 57, 74, 0) 0%, rgb(0, 0, 0) 100%);
+    box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
+  }
+  #result p {
+    position: relative;
+    top: 25%;
+    left: 38%;
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #dcdfe6;
   }
 </style>
