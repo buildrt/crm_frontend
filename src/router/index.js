@@ -17,8 +17,6 @@ const Register = () => import('../views/register/Register');
 const Login = () => import('../views/login/Login');
 const Profile = () => import('../views/profile/Profile');
 
-const Carousel = () => import('../views/carousel/Carousel');
-
 // 1.安装插件
 Vue.use(VueRouter);
 
@@ -27,13 +25,6 @@ const routes = [
   {
     path: '',
     redirect: './login'
-  },
-  {
-    path: '/carousel',
-    component: Carousel,
-    meta: {
-      title: 'CRM管理系统'
-    }
   },
   {
     path: '/login',

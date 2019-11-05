@@ -2,7 +2,6 @@
   <div id="login">
     <canvas id="canvas" width="100%" height="100%"></canvas>
     <!--<img id="bcImg" src="../../assets/img/login/loginBac.jpg" alt="">-->
-    <router-link to="/carousel" tag="button" id="CarRoute">界   面</router-link>
 
     <transition name="el-zoom-in-bottom">
       <div class="info" v-show="formShow">
@@ -78,9 +77,13 @@
             this.confirmShow = true;
             setTimeout(() => {
               this.confirmShow = false;
-              if (1 === 2) {
+              if (1 === 1) {
                 setTimeout(() => {
                   this.resultShow = true;
+                  setTimeout(() => {
+                    this.$store.state.loginJudge = true;
+                    this.$router.replace('/home');
+                  },1000);
                 },300)
               } else {
                 setTimeout(() => {
@@ -90,7 +93,7 @@
                   });
                 },300)
               }
-            },3000);
+            },1000);
             // login(this.username, this.password).then(res => {
             //   console.log(res);
             //   if (res === 1) {
@@ -103,8 +106,6 @@
             //   alert("登录失败");
             //   console.log(err);
             // })
-            // this.$store.state.loginJudge = true;
-            // this.$router.push('/home');
           }
         })
       },

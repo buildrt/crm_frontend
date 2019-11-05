@@ -1,10 +1,11 @@
 <template>
   <el-col :span="12">
+    <hr id="titleLine">
     <el-menu
       :default-active="this.$route.path"
-      background-color="#473C8B"
-      text-color="#fff"
-      active-text-color="#ffd04b"
+      background-color="#ffffff"
+      text-color="#596b8c"
+      active-text-color="#333333"
       class="el-menu-vertical-demo"
       router
       @open="handleOpen"
@@ -54,16 +55,19 @@
 </script>
 
 <style scoped>
+  @import "../../../assets/css/titleLine/titleLine.css";
   .el-col {
     position: absolute;
     top: 0;
-    width: 13%;
-    height: 100%;
-    background-color: #473C8B;
-    box-shadow: 8px 0 5px rgba(100,100,100,.5);
+    width: 12%;
+    left: 5%;
+    bottom: 0;
+    background-color: #ffffff;
+    box-shadow: 4px 0 3px rgba(100,100,100,.2);
   }
   .el-menu {
     top: 18%;
+    font-weight: bold;
     overflow-y: hidden;
   }
   .el-menu-item i {

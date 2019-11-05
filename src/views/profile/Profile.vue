@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <profile_-edit :ename="name" :ephone="phone" :eemail="email" :egender="gender"></profile_-edit>
 
     <div id="showdiv">

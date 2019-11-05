@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <main-tab-bar></main-tab-bar>
+    <head-bar></head-bar>
+    <hr id="titleLine">
+    <main-bar></main-bar>
     <transition :name="transitionName">
       <keep-alive>
         <router-view v-if="isRouterAlive"></router-view>
@@ -10,15 +12,16 @@
 </template>
 
 <script>
-  import MainTabBar from "./components/content/mainTabbar/MainTabBar";
   import 'element-ui/lib/theme-chalk/index.css';
   import 'vue-event-calendar/dist/style.css'
-  import Carousel from "./views/carousel/Carousel";
+  import MainBar from "./components/content/mainTabbar/mainBar";
+  import HeadBar from "./components/content/headBar/HeadBar";
+
   export default {
     name: 'app',
     components: {
-      Carousel,
-      MainTabBar,
+      HeadBar,
+      MainBar,
     },
     data() {
       return {
@@ -60,4 +63,5 @@
 <style>
   @import "assets/css/base.css";
   @import "assets/css/Animation/appStyle.css";
+  @import "assets/css/titleLine/titleLine.css";
 </style>
