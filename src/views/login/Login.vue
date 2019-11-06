@@ -81,7 +81,8 @@
                 setTimeout(() => {
                   this.resultShow = true;
                   setTimeout(() => {
-                    this.$store.state.loginJudge = true;
+                    this.$store.commit('setIsLogin', true);
+                    window.localStorage.setItem('loginJudge', 'true');
                     this.$router.replace('/home');
                   },1000);
                 },300)

@@ -109,6 +109,10 @@ const routes = [
 
 ];
 
+if (window.localStorage.getItem('loginJudge') === 'true') {
+  store.commit('setIsLogin',Boolean(window.localStorage.getItem('loginJudge')));
+}
+
 const router = new VueRouter({
   routes,
   mode: 'hash'

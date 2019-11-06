@@ -1,9 +1,6 @@
 export default {
-  loginJudgeChange(state) {
-    state.loginJudge = !state.loginJudge;
-  },
-  loginTrue(state) {
-    state.loginJudge = true;
+  setIsLogin(state, loginJudge) {
+    state.loginJudge = loginJudge;
   },
   logout(state) {
     state.loginJudge = false;
