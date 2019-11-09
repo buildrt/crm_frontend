@@ -1,12 +1,10 @@
 <template>
   <div id="app">
-    <head-bar></head-bar>
-    <hr id="titleLine">
-    <main-bar></main-bar>
-    <side-tab-bar></side-tab-bar>
-    <keep-alive>
-      <router-view v-if="isRouterAlive"></router-view>
-    </keep-alive>
+    <head-bar v-if="this.$store.getters.isLogin === true"></head-bar>
+    <hr id="titleLine" v-if="this.$store.getters.isLogin === true">
+    <main-bar v-if="this.$store.getters.isLogin === true"></main-bar>
+    <side-tab-bar v-if="this.$store.getters.isLogin === true"></side-tab-bar>
+    <router-view></router-view>
   </div>
 </template>
 

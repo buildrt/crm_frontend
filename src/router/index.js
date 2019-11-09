@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import store from '../store/index'
 
 const Home = () => import('../views/home/Home');
-const HomeMission = () => import('../views/home/mission/HomeMission');
-const HomeEcharts = () => import('../views/home/echarts/HomeEcharts');
+const HomeSale = () => import('../views/home/sale/HomeSale');
+const HomeOrder = () => import('../views/home/order/HomeOrder');
 const HomeSchedule = () => import('../views/home/schedule/HomeSchedule');
 
 const Client = () => import('../views/client/Client');
@@ -45,19 +45,19 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: 'mission'
+        redirect: 'orderInfo'
       },
       {
         path: 'schedule',
         component: HomeSchedule
       },
       {
-        path: 'mission',
-        component: HomeMission
+        path: 'saleInfo',
+        component: HomeSale
       },
       {
-        path: 'echarts',
-        component: HomeEcharts
+        path: 'orderInfo',
+        component: HomeOrder
       }
     ]
   },
@@ -112,6 +112,20 @@ const routes = [
 if (window.localStorage.getItem('loginJudge') === 'true') {
   store.commit('setIsLogin',Boolean(window.localStorage.getItem('loginJudge')));
 }
+
+window.onbeforeunload = function (e) {
+  e = e || window.event;
+
+  // 兼容IE8和Firefox 4之前的版本
+  if (e) {
+    e.returnValue = '关闭提示';
+  }
+  store.commit('setIsLogin', false);
+  window.localStorage.setItem('loginJudge', 'false');
+  // Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+
+  return '关闭提示';
+};
+
 
 const router = new VueRouter({
   routes,

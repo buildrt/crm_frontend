@@ -14,6 +14,9 @@
           <td>
             <p @click="JumpToInfo2">其他信息</p>
           </td>
+          <td>
+            <p @click="logOut">退出系统</p>
+          </td>
         </tr>
       </table>
     </div>
@@ -80,11 +83,8 @@
     },
     methods: {
       logOut() {
-        // 注销后 清除session信息 ，并返回登录页
-        //console.log(window.sessionStorage,'before');
-        window.sessionStorage.removeItem('data');
-        //console.log(window.sessionStorage,'after');
-        this.$store.state.loginJudge = false;
+        this.$store.commit('setIsLogin', false);
+        window.localStorage.setItem('loginJudge', 'false');
         this.$router.replace('/login');
       },
       JumpToInfo() {
@@ -141,9 +141,9 @@
   }
   #titleTable {
     position: absolute;
-    width: 30%;
+    width: 40%;
     height: 40px;
-    right: 10%;
+    right: 5%;
     top: 85%;
     text-align: center;
   }
@@ -159,7 +159,8 @@
     height: 400px;
     left: 1%;
     background-color: white;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
   }
   #info1 {
     position: absolute;
@@ -168,7 +169,8 @@
     height: 500px;
     left: 30%;
     background-color: white;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
   }
   #info2 {
     position: absolute;
@@ -177,7 +179,8 @@
     height: 350px;
     left: 74%;
     background-color: white;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
   }
   #foot {
     position: absolute;

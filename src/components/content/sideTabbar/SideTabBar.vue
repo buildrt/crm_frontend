@@ -10,29 +10,29 @@
       router
       @open="handleOpen"
       @close="handleClose">
-      <el-menu-item index="/home/mission">
+      <el-menu-item index="/home/orderInfo">
+        <i class="el-icon-menu"></i>
+        <span slot="title">订单信息</span>
+      </el-menu-item>
+      <el-menu-item index="/home/saleInfo">
         <i class="el-icon-document"></i>
-        <span slot="title">任务</span>
+        <span slot="title">销售信息</span>
       </el-menu-item>
       <el-menu-item index="/home/schedule">
         <i class="el-icon-menu"></i>
-        <span slot="title">日程</span>
+        <span slot="title">客户信息</span>
       </el-menu-item>
       <el-menu-item index="/home/echarts">
         <i class="el-icon-setting"></i>
-        <span slot="title">图表</span>
+        <span slot="title">货物信息</span>
       </el-menu-item>
       <el-menu-item>
         <i class="el-icon-document"></i>
-        <span slot="title">任务</span>
-      </el-menu-item>
-      <el-menu-item>
-        <i class="el-icon-menu"></i>
-        <span slot="title">日历</span>
+        <span slot="title">商机信息</span>
       </el-menu-item>
       <el-menu-item>
         <i class="el-icon-setting"></i>
-        <span slot="title">图表</span>
+        <span slot="title">用户信息</span>
       </el-menu-item>
     </el-menu>
   </el-col>
