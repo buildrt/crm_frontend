@@ -18,7 +18,7 @@
         <i class="el-icon-document"></i>
         <span slot="title">销售信息</span>
       </el-menu-item>
-      <el-menu-item index="/home/schedule">
+      <el-menu-item index="/client/clientInfo">
         <i class="el-icon-menu"></i>
         <span slot="title">客户信息</span>
       </el-menu-item>
@@ -30,7 +30,7 @@
         <i class="el-icon-document"></i>
         <span slot="title">商机信息</span>
       </el-menu-item>
-      <el-menu-item>
+      <el-menu-item index="/profile">
         <i class="el-icon-setting"></i>
         <span slot="title">用户信息</span>
       </el-menu-item>

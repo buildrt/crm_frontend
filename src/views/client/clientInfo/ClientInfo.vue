@@ -1,7 +1,11 @@
 <template>
   <div id="clientInfo">
+    <el-breadcrumb id="breadcrumb" separator="/">
+      <el-breadcrumb-item>客户管理</el-breadcrumb-item>
+      <el-breadcrumb-item>客户信息</el-breadcrumb-item>
+    </el-breadcrumb>
     <div id="title">
-      <p>客户管理</p>
+      <p>客户信息</p>
     </div>
     <div id="infoTable">
       <div id="headTable"></div>
@@ -19,9 +23,16 @@
           <el-table-column
             fixed
             sortable
+            prop="cid"
+            label="客户ID"
+            width="120">
+          </el-table-column>
+          <el-table-column
+            fixed
+            sortable
             prop="cname"
             label="客户名称"
-            width="250">
+            width="120">
           </el-table-column>
           <el-table-column
             prop="rank"
@@ -36,40 +47,10 @@
             width="120">
           </el-table-column>
           <el-table-column
-            prop="chargeMan"
-            sortable
-            label="负责人"
-            width="90">
-          </el-table-column>
-          <el-table-column
-            prop="updateTime"
-            sortable
-            label="更新时间"
-            width="180">
-          </el-table-column>
-          <el-table-column
-            prop="status"
-            sortable
-            label="成交状态"
-            width="120">
-          </el-table-column>
-          <el-table-column
-            prop="createTime"
-            sortable
-            label="创建时间"
-            width="180">
-          </el-table-column>
-          <el-table-column
             prop="remark"
             sortable
             label="备注"
             width="220">
-          </el-table-column>
-          <el-table-column
-            prop="nextTime"
-            sortable
-            label="下次联系时间"
-            width="180">
           </el-table-column>
           <el-table-column
             prop="phone"
@@ -90,12 +71,13 @@
         </el-pagination>
       </div>
     </div>
+    <div id="foot">
+
+    </div>
   </div>
 </template>
 
 <script>
-  import axios from "../../../network/axios";
-
   export default {
     name: "ClientInfo",
     methods: {
@@ -107,36 +89,6 @@
         console.log(`当前页: ${val}`);
         this.currpage=val;
       },
-      getClientData() {
-        axios({
-          url: '/tableInfo'
-        }).then(res => {
-          let clientData = res.data;
-          let data = [];
-          let len = clientData.length;
-          // console.log(clientData);
-          for (let i=0; i<len; i++ ){
-            let obj = {};
-            obj.cname = clientData[i].cname;
-            obj.rank = clientData[i].rank;
-            obj.source = clientData[i].source;
-            obj.chargeMan = clientData[i].chargeMan;
-            obj.updateTime = clientData[i].updateTime;
-            obj.status = clientData[i].status;
-            obj.createTime = clientData[i].createTime;
-            obj.remark = clientData[i].remark;
-            obj.nextTime = clientData[i].nextTime;
-            obj.phone = clientData[i].phone;
-            data[i] = obj;
-          }
-          this.clientData = data;
-        }).catch(error => {
-          console.log("数据获取失败");
-        })
-      }
-    },
-    created(){
-      this.getClientData();
     },
     data() {
       return {
@@ -149,27 +101,34 @@
 </script>
 
 <style scoped>
+  #clientInfo {
+    position: absolute;
+    left: 18%;
+    top: 11%;
+    width: 81.99%;
+    height: 88.99%;
+    overflow-y: scroll;
+  }
+  #breadcrumb {
+    position: absolute;
+    top: 7%;
+    left: 2%;
+    font-size: 15px;
+  }
   #title {
     position: absolute;
-    left: 200px;
-    top: 10%;
-    width: 84%;
-    height: 15%;
-    padding: 10px;
-    margin-top: 20px;
-  }
-  #title p {
-    position: relative;
-    top: 30%;
+    left: 2%;
+    top: 14%;
     font-size: 22px;
+    color: #6e00ff;
   }
   #infoTable {
     position: absolute;
-    left: 200px;
-    top: 25%;
+    left: 2%;
+    top: 23%;
     margin-top: 20px;
-    width: 84%;
-    height: 70%;
+    width: 96%;
+    height: 500px;
     background-color: white;
     padding: 10px;
   }
@@ -185,7 +144,13 @@
   }
   #footTable {
     position: absolute;
-    top: 91%;
+    top: 85%;
     right: 10%;
+  }
+  #foot {
+    position: absolute;
+    top: 115%;
+    width: 100%;
+    height: 80px;
   }
 </style>

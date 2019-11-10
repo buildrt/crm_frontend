@@ -18,31 +18,47 @@
         style="width: 96%">
         <el-table-column
           label="客户"
+          width="80"
           fixed>
         </el-table-column>
         <el-table-column
           label="销售名"
+          width="150"
           fixed>
         </el-table-column>
         <el-table-column
+          width="200"
           label="货物">
         </el-table-column>
         <el-table-column
+          width="80"
           label="数量">
         </el-table-column>
         <el-table-column
+          width="80"
           label="总金额">
         </el-table-column>
         <el-table-column
+          width="80"
           label="完成状态">
         </el-table-column>
         <el-table-column
+          width="200"
           label="创建时间">
         </el-table-column>
         <el-table-column
           label="备注">
         </el-table-column>
       </el-table>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currpage"
+        :page-sizes="[2, 4, 6, 8]"
+        :page-size="pagesize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="10">
+      </el-pagination>
     </div>
     <div id="foot">
 
@@ -55,7 +71,8 @@
     name: "HomeOrder",
     data() {
       return {
-
+        pagesize: 8,  // 每页的数据数
+        currpage: 1,  // 默认开始页面
       }
     },
     mounted() {
@@ -79,6 +96,12 @@
             data: [5, 20, 36, 10, 10, 20]
           }]
         });
+      },
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
       }
     }
   }
@@ -131,7 +154,7 @@
     top: 120%;
     width: 96%;
     left: 2%;
-    height: 500px;
+    height: 600px;
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
@@ -148,11 +171,16 @@
     position: absolute;
     top: 15%;
     left: 2%;
-    height: 80%;
+    height: 60%;
+  }
+  .el-pagination {
+    position: absolute;
+    top: 85%;
+    right: 5%;
   }
   #foot {
     position: absolute;
-    top: 210%;
+    top: 230%;
     width: 100%;
     height: 80px;
   }

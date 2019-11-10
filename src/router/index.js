@@ -9,7 +9,6 @@ const HomeSchedule = () => import('../views/home/schedule/HomeSchedule');
 
 const Client = () => import('../views/client/Client');
 const ClientInfo = () => import('../views/client/clientInfo/ClientInfo');
-const Contacts = () => import('../views/client/contacts/Contacts');
 
 const Analysis = () => import('../views/analysis/Analysis');
 
@@ -77,10 +76,6 @@ const routes = [
         path: 'clientInfo',
         component: ClientInfo
       },
-      {
-        path: 'contacts',
-        component: Contacts
-      }
     ]
   },
   {
