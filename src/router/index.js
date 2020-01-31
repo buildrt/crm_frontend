@@ -5,16 +5,19 @@ import store from '../store/index'
 const Home = () => import('../views/home/Home');
 const HomeSale = () => import('../views/home/sale/HomeSale');
 const HomeOrder = () => import('../views/home/order/HomeOrder');
-const HomeSchedule = () => import('../views/home/schedule/HomeSchedule');
 
 const Client = () => import('../views/client/Client');
 const ClientInfo = () => import('../views/client/clientInfo/ClientInfo');
 
-const Analysis = () => import('../views/analysis/Analysis');
+const Business = () => import('../views/business/Business');
+const GoodsInfo = () => import('../views/business/goodsInfo/GoodsInfo');
+const Opportunity = () => import('../views/business/opportunity/Opportunity');
 
 const Register = () => import('../views/register/Register');
 const Login = () => import('../views/login/Login');
 const Profile = () => import('../views/profile/Profile');
+const ProfileAdmin = () => import('../views/profile/ProfileAdmin');
+const ProfileAdminInfo = () => import('../views/profile/profileAdminInfo/ProfileAdminInfo');
 
 // 1.安装插件
 Vue.use(VueRouter);
@@ -47,10 +50,6 @@ const routes = [
         redirect: 'orderInfo'
       },
       {
-        path: 'schedule',
-        component: HomeSchedule
-      },
-      {
         path: 'saleInfo',
         component: HomeSale
       },
@@ -79,12 +78,26 @@ const routes = [
     ]
   },
   {
-    path: '/analysis',
-    component: Analysis,
+    path: '/business',
+    component: Business,
     meta: {
       title: '数据分析',
       index: 1
-    }
+    },
+    children: [
+      {
+        path: '',
+        redirect: 'goodsInfo'
+      },
+      {
+        path: 'goodsInfo',
+        component: GoodsInfo
+      },
+      {
+        path: 'opportunity',
+        component: Opportunity
+      }
+    ]
   },
   {
     path: '/register',
@@ -101,7 +114,23 @@ const routes = [
       title: '个人空间',
     }
   },
-
+  {
+    path: '/profileAdmin',
+    component: ProfileAdmin,
+    meta: {
+      title: '用户管理',
+    },
+    children: [
+      {
+        path: '',
+        redirect: 'profileAdminInfo'
+      },
+      {
+        path: 'profileAdminInfo',
+        component: ProfileAdminInfo
+      },
+    ]
+  },
 ];
 
 if (window.localStorage.getItem('loginJudge') === 'true') {

@@ -20,8 +20,8 @@
         </td>
       </tr>
       <tr>
-        <td @click="AnalysisClick">
-          <el-tooltip class="item" effect="dark" content="数据分析" placement="right-start">
+        <td @click="BusinessClick">
+          <el-tooltip class="item" effect="dark" content="商业管理" placement="right-start">
             <i class="el-icon-s-data"></i>
           </el-tooltip>
         </td>
@@ -40,8 +40,8 @@
       ClientClick() {
         this.$router.push('/client');
       },
-      AnalysisClick() {
-        this.$router.push('/analysis');
+      BusinessClick() {
+        this.$router.push('/business');
       },
       ProfileClick() {
         this.$router.push('/profile');

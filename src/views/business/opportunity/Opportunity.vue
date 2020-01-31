@@ -1,23 +1,21 @@
 <template>
-  <div id="clientInfo">
+  <div id="opportunity">
     <el-breadcrumb id="breadcrumb" separator="/">
-      <el-breadcrumb-item>客户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>客户信息</el-breadcrumb-item>
+      <el-breadcrumb-item>商业管理</el-breadcrumb-item>
+      <el-breadcrumb-item>商机信息</el-breadcrumb-item>
     </el-breadcrumb>
-    <div id="title">
-      <p>客户信息</p>
-    </div>
-    <div id="infoTable">
-      <p>客户</p>
-      <div id="clientSearch">
+    <p id="title">商机信息</p>
+    <div id="opportunityTable">
+      <p>商机</p>
+      <div id="opporSearch">
         <el-form
           :inline="true"
-          id="clientForm"
-          :model="clientSearchData"
-          :rules="clientSearchRules"
-          ref="clientSearchData">
-          <el-form-item prop="clientId">
-            <el-input placeholder="请输入销售号" autocomplete="off" v-model="clientSearchData.clientId" type="text"></el-input>
+          id="opporForm"
+          :model="opporSearchData"
+          :rules="opporSearchRules"
+          ref="orderSearchData">
+          <el-form-item prop="opporId">
+            <el-input placeholder="请输入订单号" autocomplete="off" v-model="opporSearchData.opporId" type="text"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button icon="el-icon-search"></el-button>
@@ -25,7 +23,6 @@
         </el-form>
       </div>
       <el-table
-        :data="clientData.slice((currpage-1)*pagesize,currpage*pagesize)"
         style="width: 96%;"
         border
         stripe>
@@ -36,50 +33,48 @@
         <el-table-column
           fixed
           sortable
-          prop="cid"
-          label="客户ID"
+          prop="opporId"
+          label="商机ID"
           width="120">
         </el-table-column>
         <el-table-column
           fixed
           sortable
-          prop="cname"
-          label="客户名称"
+          prop="sale"
+          label="关联销售"
           width="120">
         </el-table-column>
         <el-table-column
-          prop="rank"
+          prop="client"
           sortable
-          label="客户级别"
+          label="关联客户"
           width="150">
         </el-table-column>
         <el-table-column
-          prop="source"
+          prop="name"
           sortable
-          label="客户来源"
+          label="名称"
           width="120">
         </el-table-column>
         <el-table-column
-          width="150"
-          prop="phone"
-          label="手机">
+          prop="sta"
+          sortable
+          label="状态描述"
+          width="120">
         </el-table-column>
         <el-table-column
-          prop="remark"
-          sortable
-          label="备注">
+          prop="credit"
+          label="金额"
+          width="120">
         </el-table-column>
-        <el-table-column label="操作">
-          <template slot-scope="scope">
-            <el-button
-              type="primary"
-              @click="handleEdit(scope.$index, scope.row)"
-              size="mini">修改</el-button>
-            <el-button
-              size="mini"
-              @click="handleDelete(scope.$index, scope.row)"
-              type="danger">删除</el-button>
-          </template>
+        <el-table-column
+          prop="changeTime"
+          label="修改时间"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="description"
+          label="备注">
         </el-table-column>
       </el-table>
       <el-pagination
@@ -89,7 +84,7 @@
         :page-sizes="[2, 4, 6, 8]"
         :page-size="pagesize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="clientData.length">
+        :total="100">
       </el-pagination>
     </div>
     <div id="foot">
@@ -100,30 +95,15 @@
 
 <script>
   export default {
-    name: "ClientInfo",
-    methods: {
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      },
-      handleEdit(index, row) {
-        console.log(index, row);
-      },
-      handleDelete(index, row) {
-        console.log(index, row);
-      }
-    },
+    name: "Opportunity",
     data() {
       return {
-        clientData: [],
-        pagesize: 8,  // 每页的数据数
-        currpage: 1,  // 默认开始页面
-        clientSearchData: {
-          clientId: ''
+        currpage: 1,
+        pagesize: 8,
+        opporSearchData: {
+          opporId: ''
         },
-        clientSearchRules: {
+        opporSearchRules: {
 
         }
       }
@@ -132,12 +112,13 @@
 </script>
 
 <style scoped>
-  #clientInfo {
+  #opportunity {
     position: absolute;
     left: 18%;
     top: 11%;
     width: 81.99%;
     height: 88.99%;
+    /*background-color: #ff5777;*/
     overflow-y: scroll;
   }
   #breadcrumb {
@@ -148,12 +129,12 @@
   }
   #title {
     position: absolute;
-    left: 2%;
     top: 14%;
+    left: 2%;
     font-size: 22px;
     color: #6e00ff;
   }
-  #infoTable {
+  #opportunityTable {
     position: absolute;
     top: 23%;
     left: 2%;
@@ -163,7 +144,7 @@
     border-radius: 6px;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
   }
-  #infoTable p {
+  #opportunityTable p{
     position: absolute;
     top: 6%;
     left: 2%;
@@ -171,21 +152,21 @@
     /*color: black;*/
     font-weight: bold;
   }
-  #clientSearch {
+  #opporSearch {
     position: absolute;
     top: 6%;
     left: 25%;
     width: 25%;
   }
-  #clientSearch #clientForm {
+  #opporSearch #opporForm {
     position: absolute;
     width: 100%;
   }
-  #clientForm .el-input {
+  #opporForm .el-input {
     position: absolute;
     width: 200px;
   }
-  #clientForm .el-button {
+  #opporForm .el-button {
     position: absolute;
     left: 200px;
   }

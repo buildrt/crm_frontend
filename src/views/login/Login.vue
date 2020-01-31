@@ -77,6 +77,27 @@
             this.confirmShow = true;
             setTimeout(() => {
               this.confirmShow = false;
+              // login(this.username, this.password).then(res => {
+              //   if (res === 1) {
+              //     setTimeout(() => {
+              //       this.resultShow = true;
+              //       setTimeout(() => {
+              //         this.$store.commit('setIsLogin', true);
+              //         window.localStorage.setItem('loginJudge', 'true');
+              //         this.$router.replace('/home');
+              //       },1000);
+              //     },300)
+              //   } else {
+              //     setTimeout(() => {
+              //       this.formShow = true;
+              //       this.$alert('用户名密码错误', {
+              //         confirmButtonText: '确定',
+              //       });
+              //     },300)
+              //   }
+              // }).catch(err => {
+              //   console.log(err);
+              // })
               if (1 === 1) {
                 setTimeout(() => {
                   this.resultShow = true;
@@ -95,18 +116,6 @@
                 },300)
               }
             },1000);
-            // login(this.username, this.password).then(res => {
-            //   console.log(res);
-            //   if (res === 1) {
-            //     alert("登录成功");
-            //     this.$router.push('/home');
-            //   }else {
-            //     alert("登录失败");
-            //   }
-            // }).catch(err => {
-            //   alert("登录失败");
-            //   console.log(err);
-            // })
           }
         })
       },

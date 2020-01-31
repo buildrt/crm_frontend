@@ -1,23 +1,21 @@
 <template>
-  <div id="clientInfo">
+  <div id="goods">
     <el-breadcrumb id="breadcrumb" separator="/">
-      <el-breadcrumb-item>客户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>客户信息</el-breadcrumb-item>
+      <el-breadcrumb-item>商业管理</el-breadcrumb-item>
+      <el-breadcrumb-item>货物信息</el-breadcrumb-item>
     </el-breadcrumb>
-    <div id="title">
-      <p>客户信息</p>
-    </div>
-    <div id="infoTable">
-      <p>客户</p>
-      <div id="clientSearch">
+    <p id="title">货物信息</p>
+    <div id="goodsTable">
+      <p>货物</p>
+      <div id="goodsSearch">
         <el-form
           :inline="true"
-          id="clientForm"
-          :model="clientSearchData"
-          :rules="clientSearchRules"
+          id="goodsForm"
+          :model="goodsSearchData"
+          :rules="goodsSearchRules"
           ref="clientSearchData">
-          <el-form-item prop="clientId">
-            <el-input placeholder="请输入销售号" autocomplete="off" v-model="clientSearchData.clientId" type="text"></el-input>
+          <el-form-item prop="goodsId">
+            <el-input placeholder="请输入销售号" autocomplete="off" v-model="goodsSearchData.goodsId" type="text"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button icon="el-icon-search"></el-button>
@@ -25,7 +23,6 @@
         </el-form>
       </div>
       <el-table
-        :data="clientData.slice((currpage-1)*pagesize,currpage*pagesize)"
         style="width: 96%;"
         border
         stripe>
@@ -36,37 +33,57 @@
         <el-table-column
           fixed
           sortable
-          prop="cid"
-          label="客户ID"
+          prop="goodsId"
+          label="货物ID"
           width="120">
         </el-table-column>
         <el-table-column
           fixed
           sortable
-          prop="cname"
-          label="客户名称"
+          prop="goodsName"
+          label="货物名称"
           width="120">
         </el-table-column>
         <el-table-column
-          prop="rank"
+          prop="type"
           sortable
-          label="客户级别"
+          label="类别"
           width="150">
         </el-table-column>
         <el-table-column
-          prop="source"
+          prop="amount"
           sortable
-          label="客户来源"
+          label="数量"
           width="120">
         </el-table-column>
         <el-table-column
-          width="150"
-          prop="phone"
-          label="手机">
+          prop="cost"
+          sortable
+          label="单价"
+          width="120">
         </el-table-column>
         <el-table-column
-          prop="remark"
-          sortable
+          prop="location"
+          label="位置"
+          width="220">
+        </el-table-column>
+        <el-table-column
+          prop="source"
+          label="来源"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="inTime"
+          label="入库时间"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="status"
+          label="上架状态"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="description"
           label="备注">
         </el-table-column>
         <el-table-column label="操作">
@@ -89,7 +106,7 @@
         :page-sizes="[2, 4, 6, 8]"
         :page-size="pagesize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="clientData.length">
+        :total="100">
       </el-pagination>
     </div>
     <div id="foot">
@@ -100,7 +117,19 @@
 
 <script>
   export default {
-    name: "ClientInfo",
+    name: "GoodsInfo",
+    data() {
+      return {
+        currpage: 1,
+        pagesize: 8,
+        goodsSearchData: {
+          goodsId: ''
+        },
+        goodsSearchRules: {
+
+        }
+      }
+    },
     methods: {
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
@@ -114,30 +143,18 @@
       handleDelete(index, row) {
         console.log(index, row);
       }
-    },
-    data() {
-      return {
-        clientData: [],
-        pagesize: 8,  // 每页的数据数
-        currpage: 1,  // 默认开始页面
-        clientSearchData: {
-          clientId: ''
-        },
-        clientSearchRules: {
-
-        }
-      }
     }
   }
 </script>
 
 <style scoped>
-  #clientInfo {
+  #goods {
     position: absolute;
     left: 18%;
     top: 11%;
     width: 81.99%;
     height: 88.99%;
+    /*background-color: #ff5777;*/
     overflow-y: scroll;
   }
   #breadcrumb {
@@ -148,12 +165,12 @@
   }
   #title {
     position: absolute;
-    left: 2%;
     top: 14%;
+    left: 2%;
     font-size: 22px;
     color: #6e00ff;
   }
-  #infoTable {
+  #goodsTable {
     position: absolute;
     top: 23%;
     left: 2%;
@@ -163,7 +180,7 @@
     border-radius: 6px;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
   }
-  #infoTable p {
+  #goodsTable p{
     position: absolute;
     top: 6%;
     left: 2%;
@@ -171,21 +188,21 @@
     /*color: black;*/
     font-weight: bold;
   }
-  #clientSearch {
+  #goodsSearch {
     position: absolute;
     top: 6%;
     left: 25%;
     width: 25%;
   }
-  #clientSearch #clientForm {
+  #goodsSearch #goodsForm {
     position: absolute;
     width: 100%;
   }
-  #clientForm .el-input {
+  #goodsForm .el-input {
     position: absolute;
     width: 200px;
   }
-  #clientForm .el-button {
+  #goodsForm .el-button {
     position: absolute;
     left: 200px;
   }
@@ -193,7 +210,6 @@
     position: absolute;
     top: 15%;
     left: 2%;
-    height: 60%;
   }
   .el-pagination {
     position: absolute;

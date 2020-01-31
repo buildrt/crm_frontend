@@ -22,17 +22,21 @@
         <i class="el-icon-menu"></i>
         <span slot="title">客户信息</span>
       </el-menu-item>
-      <el-menu-item index="/home/echarts">
+      <el-menu-item index="/business/goodsInfo">
         <i class="el-icon-setting"></i>
         <span slot="title">货物信息</span>
       </el-menu-item>
-      <el-menu-item>
+      <el-menu-item index="/business/opportunity">
         <i class="el-icon-document"></i>
         <span slot="title">商机信息</span>
       </el-menu-item>
       <el-menu-item index="/profile">
         <i class="el-icon-setting"></i>
-        <span slot="title">用户信息</span>
+        <span slot="title">个人信息</span>
+      </el-menu-item>
+      <el-menu-item index="/profileAdmin">
+        <i class="el-icon-document"></i>
+        <span slot="title">用户管理</span>
       </el-menu-item>
     </el-menu>
   </el-col>

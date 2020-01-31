@@ -13,6 +13,21 @@
     </div>
     <div id="orderTable">
       <p>订单</p>
+      <div id="orderSearch">
+        <el-form
+          :inline="true"
+          id="orderForm"
+          :model="orderSearchData"
+          :rules="orderSearchRules"
+          ref="orderSearchData">
+          <el-form-item prop="orderId">
+            <el-input id="orderName" placeholder="请输入订单号" autocomplete="off" v-model="orderSearchData.orderId" type="text"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button icon="el-icon-search"></el-button>
+          </el-form-item>
+        </el-form>
+      </div>
       <el-table
         border
         style="width: 96%">
@@ -47,8 +62,21 @@
           label="创建时间">
         </el-table-column>
         <el-table-column
+          width="220"
           label="备注">
         </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button
+              type="primary"
+              @click="handleEdit(scope.$index, scope.row)"
+              size="mini">修改</el-button>
+            <el-button
+              size="mini"
+              @click="handleDelete(scope.$index, scope.row)"
+              type="danger">删除</el-button>
+          </template>
+      </el-table-column>
       </el-table>
       <el-pagination
         @size-change="handleSizeChange"
@@ -73,35 +101,29 @@
       return {
         pagesize: 8,  // 每页的数据数
         currpage: 1,  // 默认开始页面
+        orderSearchData: {
+          orderId: ''
+        },
+        orderSearchRules: {
+
+        }
       }
     },
     mounted() {
       this.drawLine();
     },
     methods: {
-      drawLine() {
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = this.$echarts.init(document.getElementById('myChart'));
-        // 绘制图表
-        myChart.setOption({
-          title: { text: '在Vue中使用echarts' },
-          tooltip: {},
-          xAxis: {
-            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-          },
-          yAxis: {},
-          series: [{
-            name: '销量',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
-          }]
-        });
-      },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+      },
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
       }
     }
   }
@@ -166,6 +188,24 @@
     font-size: 18px;
     /*color: black;*/
     font-weight: bold;
+  }
+  #orderSearch {
+    position: absolute;
+    top: 6%;
+    left: 25%;
+    width: 25%;
+  }
+  #orderSearch #orderForm {
+    position: absolute;
+    width: 100%;
+  }
+  #orderForm .el-input {
+    position: absolute;
+    width: 200px;
+  }
+  #orderForm .el-button {
+    position: absolute;
+    left: 200px;
   }
   #orderTable .el-table {
     position: absolute;

@@ -6,16 +6,22 @@
       <table id="titleTable" cellspacing="0" cellpadding="0" border="0">
         <tr>
           <td>
-            <p @click="JumpToInfo">职场信息</p>
+            <button @click="JumpToInfo">职场信息</button>
           </td>
           <td>
-            <p @click="JumpToInfo1">基本信息</p>
+            <button @click="JumpToInfo1">基本信息</button>
           </td>
           <td>
-            <p @click="JumpToInfo2">其他信息</p>
+            <button @click="JumpToInfo2">其他信息</button>
           </td>
           <td>
-            <p @click="logOut">退出系统</p>
+            <button @click="JumpToInfo3">查询用户</button>
+          </td>
+          <td>
+            <button @click="updateMyInfoDrawer = true">修改信息</button>
+          </td>
+          <td>
+            <button @click="logOut">退出系统</button>
           </td>
         </tr>
       </table>
@@ -62,6 +68,108 @@
       <p style="position: absolute; top: 25%; left: 3%; font-size: 14px">&nbsp;&nbsp;Quisque vel tellus sit amet quam efficitur sagittis. Fusce aliquam pulvinar suscipit.</p>
       <p style="position: absolute; top: 45%; left: 3%; font-size: 14px">&nbsp;&nbsp;Proin eu fringilla dui.Pellentesque mattis lobortis mauris eu tincidunt. Maecenas hendrerit faucibus dolor, in commodo lectus mattis ac.</p>
     </div>
+    <div id="info3">
+      <div id="info3Title">
+        <p>用户信息</p>
+      </div>
+      <div id="searchProfile">
+        <el-button type="primary" icon="el-icon-search" @click="profileSearchDrawer = true">查询用户</el-button>
+      </div>
+      <el-table
+        :data="profileData.slice((currpage-1)*pagesize,currpage*pagesize)"
+        style="width: 90%;"
+        border
+        stripe>
+        <el-table-column
+          type="selection"
+          width="55">
+        </el-table-column>
+        <el-table-column
+          fixed
+          sortable
+          prop="thename"
+          label="名字"
+          width="150">
+        </el-table-column>
+        <el-table-column
+          prop="gender"
+          sortable
+          fixed
+          label="性别"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="age"
+          sortable
+          label="年龄"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          width="150"
+          prop="QQ"
+          label="QQ号">
+        </el-table-column>
+        <el-table-column
+          width="150"
+          prop="tel"
+          label="电话号">
+        </el-table-column>
+        <el-table-column
+          prop="email"
+          label="电子邮箱">
+        </el-table-column>
+      </el-table>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currpage"
+        :page-sizes="[2, 4, 6, 8]"
+        :page-size="pagesize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="profileData.length">
+      </el-pagination>
+      <el-drawer
+        title="查询用户信息"
+        id=""
+        :visible.sync="profileSearchDrawer"
+        direction="rtl"
+        size="30%">
+      </el-drawer>
+    </div>
+    <el-drawer
+      title="修改个人信息"
+      id="updateMyInfo"
+      :visible.sync="updateMyInfoDrawer"
+      direction="rtl"
+      size="30%">
+      <el-form
+        :model="updateMyInfoData"
+        :rules="updateMyInfoRules"
+        ref="updateMyInfoData"
+        id="updateMyInfoForm"
+        style="width: 96%"
+        label-position="right">
+        <el-form-item label="密码" label-width="100px" prop="password" >
+          <el-input type="text" v-model="updateMyInfoData.password"></el-input>
+        </el-form-item>
+        <el-form-item label="QQ" label-width="100px" prop="qq" >
+          <el-input type="text" v-model="updateMyInfoData.qq"></el-input>
+        </el-form-item>
+        <el-form-item label="电话" label-width="100px" prop="tel" >
+          <el-input type="text" v-model="updateMyInfoData.tel"></el-input>
+        </el-form-item>
+        <el-form-item label="邮件" label-width="100px" prop="email" >
+          <el-input type="text" v-model="updateMyInfoData.email"></el-input>
+        </el-form-item>
+        <el-form-item label="备注" label-width="100px" prop="description" >
+          <el-input type="text" v-model="updateMyInfoData.description"></el-input>
+        </el-form-item>
+        <el-form-item label-width="100px">
+          <el-button type="primary" @click="updateMyData('updateMyInfoData')">修改</el-button>
+          <el-button @click="MyEditCancel('updateMyInfoData')">取消</el-button>
+        </el-form-item>
+      </el-form>
+    </el-drawer>
     <div id="foot"></div>
   </div>
 </template>
@@ -69,19 +177,90 @@
 <script>
   import Vue from 'vue';
   import VueScrollTo from 'vue-scrollto'
+  import axios from "../../network/axios";
+  import {searchMyFullData} from "../../network/profile/searchMyFullData";
   Vue.use(VueScrollTo);
 
   export default {
     name: "account",
+    mounted() {
+      //this.getMyFullData();
+    },
     components: {
 
     },
     data() {
       return {
-        imgUrl: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+        imgUrl: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        profileData: [],
+        myId: "",   //需要后端登录信息传回id，然后放入vuex中
+        MyData: {
+          clientid: "",
+          clientname: "",
+          password: "",
+          id: "",
+          bindUserId: "",
+          thename: "",
+          gender: "",
+          age: "",
+          qq: "",
+          tel: "",
+          email: "",
+          jobTime: "",
+          jobInDate: "",
+          valid: "",
+          description: "",
+        },
+        pagesize: 8,  // 每页的数据数
+        currpage: 1,  // 默认开始页面
+        profileSearchDrawer: false,
+        updateMyInfoDrawer: false,
+        updateMyInfoData: {
+          clientid: "",
+          clientname: "",
+          password: "",
+          id: "",
+          bindUserId: "",
+          thename: "",
+          gender: "",
+          age: "",
+          qq: "",
+          tel: "",
+          email: "",
+          jobTime: "",
+          jobInDate: "",
+          valid: 1,
+          description: "",
+        },
+        updateMyInfoRules: {
+
+        },
       }
     },
     methods: {
+      getMyFullData(){
+        searchMyFullData(this.myId).then(res => {
+          console.log(res);
+          console.log(res.length);
+          this.MyData.clientid = res.clientid;
+          this.MyData.clientname = res.clientname;
+          this.MyData.password = res.password;
+          this.MyData.id = res.id;
+          this.MyData.bindUserId = res.bindUserId;
+          this.MyData.thename = res.thename;
+          this.MyData.gender = res.gender;
+          this.MyData.age = res.age;
+          this.MyData.qq = res.qq;
+          this.MyData.tel = res.tel;
+          this.MyData.email = res.email;
+          this.MyData.jobTime = res.jobTime;
+          this.MyData.jobInDate = res.jobInDate;
+          this.MyData.valid = res.valid;
+          this.MyData.description = res.description;
+        }).catch(err => {
+          console.log(err);
+        })
+      },
       logOut() {
         this.$store.commit('setIsLogin', false);
         window.localStorage.setItem('loginJudge', 'false');
@@ -101,6 +280,38 @@
         document.getElementById("info2").scrollIntoView({
           behavior: "smooth"
         });
+      },
+      JumpToInfo3() {
+        document.getElementById("info3").scrollIntoView({
+          behavior: "smooth"
+        });
+      },
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      },
+      MyEditCancel(formName) {
+        this.$refs[formName].resetFields();
+        this.updateMyInfoDrawer = false;
+      },
+      updateMyData(formName) {
+        this.$refs[formName].validate(valid => {
+          if (valid) {
+            updateMyData(this.MyData.clientid,this.MyData.clientname,this.updateMyInfoData.password,this.MyData.id,this.MyData.bindUserId,this.MyData.thename,this.MyData.gender,this.MyData.age,this.updateMyInfoData.qq,this.updateMyInfoData.tel,this.updateMyInfoData.email,this.MyData.jobTime,this.MyData.jobInDate,this.MyData.valid,this.updateMyInfoData.description).then(res => {
+              if (res === 1) {
+                alert('修改成功');
+                this.updateMyInfoDrawer = false;
+                this.$router.go(0);
+              } else {
+                alert('修改失败');
+              }
+            }).catch(err => {
+              console.log(err);
+            })
+          }
+        })
       }
     }
   }
@@ -141,16 +352,19 @@
   }
   #titleTable {
     position: absolute;
-    width: 40%;
+    width: 50%;
     height: 40px;
-    right: 5%;
+    right: 3%;
     top: 85%;
     text-align: center;
   }
-  #titleTable p {
+  #titleTable button {
     color: white;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: bold;
+    border: 0;
+    outline: 0;
+    background-color: rgba(0,0,0,0);
   }
   #info {
     position: absolute;
@@ -166,7 +380,7 @@
     position: absolute;
     top: 400px;
     width: 40%;
-    height: 500px;
+    height: 400px;
     left: 30%;
     background-color: white;
     border-radius: 6px;
@@ -182,18 +396,13 @@
     border-radius: 6px;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
   }
-  #foot {
-    position: absolute;
-    top: 950px;
-    width: 96%;
-    height: 40px;
-  }
+
   #info1Table {
     position: absolute;
     top: 20%;
     width: 84%;
     margin-left: 8%;
-    height: 60%;
+    height: 75%;
   }
   #info1Table td {
     font-size: 16px;
@@ -207,5 +416,66 @@
   #info1Table svg {
     margin-right: 5px;
     margin-left: 20px;
+  }
+  #info3 {
+    position: absolute;
+    top: 145%;
+    width: 96%;
+    height: 60%;
+    left: 2%;
+    background-color: white;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+  }
+  #info3Title {
+    position: absolute;
+    width: 8%;
+    height: 12%;
+    top: 6%;
+    left: 1.5%;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+  #searchProfile {
+    position: absolute;
+    top: 4%;
+    left: 20%;
+    width: 15%;
+    height: 12%;
+  }
+  .el-table {
+    position: absolute;
+    top: 20%;
+    left: 5%;
+  }
+  .el-pagination {
+    position: absolute;
+    bottom: 10%;
+    right: 0;
+  }
+  #updateMyInfo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 22px;
+    font-weight: bolder;
+  }
+  #updateMyInfoForm {
+    position: absolute;
+    width: 100%;
+    height: 150%;
+    top: 18%;
+    margin-left: 2%;
+  }
+  #updateMyInfoForm .el-input {
+    width: 200px;
+  }
+  #foot {
+    position: absolute;
+    top: 220%;
+    width: 96%;
+    height: 40px;
   }
 </style>
