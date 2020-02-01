@@ -1,12 +1,12 @@
 import axios from '../axios'
 
-export function updateSaleData(id, bindUser, thename, salary, score, trendType, descriptions) {
+export function insertOneSaleByName(thename, salary, score, trendType, descriptions) {
   return axios({
-    url: '/Admin/UpdateOneSaler',
+    url: '/Admin/UsingNameToEstablishOneSaler',
     method: 'post',
     data: {
-      id,
-      bindUser,
+      id: "",
+      bindUser: "",
       thename,
       salary,
       score,

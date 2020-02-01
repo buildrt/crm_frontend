@@ -26,6 +26,12 @@
           <el-form-item id="searchBySalenameBtn">
             <el-button type="primary" icon="el-icon-search"  @click="searchSaleByNameBtn"></el-button>
           </el-form-item>
+          <el-form-item id="addOneSaleByNameBtn">
+            <el-button type="primary" @click="addOneSaleByNameDrawer = true">通过销售名新建</el-button>
+          </el-form-item>
+          <el-form-item id="addOneSaleByIdBtn">
+            <el-button type="primary" @click="addOneSaleByIdDrawer = true">通过销售ID新建</el-button>
+          </el-form-item>
         </el-form>
       </div>
       <el-table
@@ -130,6 +136,77 @@
           </el-form-item>
         </el-form>
       </el-drawer>
+      <el-drawer
+        title="添加一个销售信息"
+        id="addOneSaleByNameInfo"
+        :visible.sync="addOneSaleByNameDrawer"
+        direction="rtl"
+        size="30%">
+        <el-form
+          :model="addOneSaleByNameData"
+          :rules="addOneSaleByNameRules"
+          ref="addOneSaleByNameData"
+          id="addOneSaleByNameForm"
+          style="width: 96%"
+          label-position="right">
+          <el-form-item label="销售名" label-width="100px" prop="thename">
+            <el-input type="text" v-model="addOneSaleByNameData.thename"></el-input>
+          </el-form-item>
+          <el-form-item label="薪资" label-width="100px" prop="salary">
+            <el-input type="password" show-password v-model="addOneSaleByNameData.salary"></el-input>
+          </el-form-item>
+          <el-form-item label="评分" label-width="100px" prop="score" >
+            <el-input type="text" v-model="addOneSaleByNameData.score"></el-input>
+          </el-form-item>
+          <el-form-item label="销售类别" label-width="100px" prop="trendType" >
+            <el-input type="text" v-model="addOneSaleByNameData.trendType"></el-input>
+          </el-form-item>
+          <el-form-item label="备注" label-width="100px" prop="descriptions" >
+            <el-input type="text" v-model="addOneSaleByNameData.descriptions"></el-input>
+          </el-form-item>
+          <el-form-item label-width="100px">
+            <el-button type="primary" @click="InsertOneSaleByName('addOneSaleByNameData')">添加</el-button>
+            <el-button @click="addSaleCancel('addOneSaleByNameData')">取消</el-button>
+          </el-form-item>
+        </el-form>
+      </el-drawer>
+      <el-drawer
+        title="添加一个销售信息"
+        id="addOneSaleByIdInfo"
+        :visible.sync="addOneSaleByIdDrawer"
+        direction="rtl"
+        size="30%">
+        <el-form
+          :model="addOneSaleByIdData"
+          :rules="addOneSaleByIdRules"
+          ref="addOneSaleByIdData"
+          id="addOneSaleByIdForm"
+          style="width: 96%"
+          label-position="right">
+          <el-form-item label="销售ID" label-width="100px" prop="id">
+            <el-input type="text" v-model="addOneSaleByIdData.id"></el-input>
+          </el-form-item>
+          <el-form-item label="销售名" label-width="100px" prop="thename">
+            <el-input type="text" v-model="addOneSaleByIdData.thename"></el-input>
+          </el-form-item>
+          <el-form-item label="薪资" label-width="100px" prop="salary">
+            <el-input type="password" show-password v-model="addOneSaleByIdData.salary"></el-input>
+          </el-form-item>
+          <el-form-item label="评分" label-width="100px" prop="score" >
+            <el-input type="text" v-model="addOneSaleByIdData.score"></el-input>
+          </el-form-item>
+          <el-form-item label="销售类别" label-width="100px" prop="trendType" >
+            <el-input type="text" v-model="addOneSaleByIdData.trendType"></el-input>
+          </el-form-item>
+          <el-form-item label="备注" label-width="100px" prop="descriptions" >
+            <el-input type="text" v-model="addOneSaleByIdData.descriptions"></el-input>
+          </el-form-item>
+          <el-form-item label-width="100px">
+            <el-button type="primary" @click="InsertOneSaleById('addOneSaleByIdData')">添加</el-button>
+            <el-button @click="addSaleCancel('addOneSaleByIdData')">取消</el-button>
+          </el-form-item>
+        </el-form>
+      </el-drawer>
     </div>
     <div id="foot">
 
@@ -140,6 +217,7 @@
 <script>
   import {searchSaleDataById} from "../../../network/sale/searchSaleDataById";
   import {searchSaleDataByName} from "../../../network/sale/searchSaleDataByName";
+  import {insertOneSaleByName} from "../../../network/sale/insertOneSaleByName";
 
   export default {
     name: "HomeSale",
@@ -147,6 +225,36 @@
       return {
         currpage: 1,
         pagesize: 8,
+        addOneSaleByNameDrawer: false,
+        addOneSaleByIdDrawer: false,
+        addOneSaleByNameData: {
+          id: "",
+          bindUser: "",
+          thename: "",
+          salary: "",
+          score: "",
+          trendType: "",
+          descriptions: "",
+        },
+        addOneSaleByNameRules: {
+          thename: [
+            { required: true, message: '请输入销售名', trigger: 'blur' },
+          ]
+        },
+        addOneSaleByIdData: {
+          id: "",
+          bindUser: "",
+          thename: "",
+          salary: "",
+          score: "",
+          trendType: "",
+          descriptions: "",
+        },
+        addOneSaleByIdRules: {
+          id: [
+            { required: true, message: '请输入销售ID', trigger: 'blur' },
+          ]
+        },
         saleSearchData: {
           id: "",
           bindUser: "",
@@ -268,6 +376,47 @@
       editSaleCancel(formName) {
         this.$refs[formName].resetFields();
         this.editSaleDrawer = false;
+      },
+      InsertOneSaleByName(formName) {
+        this.$refs[formName].validate(valid => {
+          if (valid) {
+            insertOneSaleByName(this.addOneSaleByNameData.thename,this.addOneSaleByNameData.salary,this.addOneSaleByNameData.score,this.addOneSaleByNameData.trendType,this.addOneSaleByNameData.descriptions).then(res => {
+              console.log(res);
+              if (res === 1) {
+                alert('添加成功');
+                this.addOneSaleByNameDrawer = false;
+                this.$router.go(0);
+              } else {
+                alert('添加失败');
+              }
+            }).catch(err => {
+              console.log(err);
+            })
+          }
+        })
+      },
+      addSaleCancel(formName) {
+        this.$refs[formName].resetFields();
+        this.addOneSaleByNameDrawer = false;
+        this.addOneSaleByIdDrawer = false;
+      },
+      InsertOneSaleById(formName) {
+        this.$refs[formName].validate(valid => {
+          if (valid) {
+            insertOneSaleById(this.addOneSaleByIdData.id,this.addOneSaleByIdData.thename,this.addOneSaleByIdData.salary,this.addOneSaleByIdData.score,this.addOneSaleByIdData.trendType,this.addOneSaleByIdData.descriptions).then(res => {
+              console.log(res);
+              if (res === 1) {
+                alert('添加成功');
+                this.addOneSaleByNameDrawer = false;
+                this.$router.go(0);
+              } else {
+                alert('添加失败');
+              }
+            }).catch(err => {
+              console.log(err);
+            })
+          }
+        })
       }
     }
   }
@@ -353,7 +502,7 @@
     top: 85%;
     right: 5%;
   }
-  #updateSaleInfo {
+  #updateSaleInfo, #addOneSaleByNameInfo,#addOneSaleByIdInfo{
     position: absolute;
     top: 0;
     left: 0;
@@ -362,7 +511,7 @@
     font-size: 22px;
     font-weight: bolder;
   }
-  #saleEditForm {
+  #saleEditForm, #addOneSaleByNameForm, #addOneSaleByIdForm{
     position: absolute;
     width: 100%;
     height: 150%;
@@ -370,8 +519,16 @@
     /*border: 1px solid black;*/
     margin-left: 2%;
   }
-  #saleEditForm .el-input {
+  #saleEditForm .el-input,#addOneSaleByNameForm .el-input, #addOneSaleByIdForm .el-input {
     width: 200px;
+  }
+  #addOneSaleByNameBtn {
+    position: absolute;
+    right: 35%;
+  }
+  #addOneSaleByIdBtn {
+    position: absolute;
+    right: 15%;
   }
   #foot {
     position: absolute;
