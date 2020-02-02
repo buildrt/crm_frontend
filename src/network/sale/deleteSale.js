@@ -4,7 +4,7 @@ export function deleteSaleData(id) {
   return axios({
     url: '/Admin/DeleteOneOrMoreSaler',
     method: 'post',
-    data: {
+    params: {
       id
     }
   })

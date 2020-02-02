@@ -1,8 +1,8 @@
 import axios from '../axios'
 
-export function searchSaleDataByName(thename) {
+export function searchCustomerByName(thename) {
   return axios({
-    url: '/Admin/UsingNameToSearch',
+    url: '/Admin/SelectCustomer',
     method: 'post',
     params: {
       thename

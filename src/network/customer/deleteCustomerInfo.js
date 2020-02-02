@@ -1,8 +1,8 @@
 import axios from '../axios'
 
-export function searchSaleDataById(id) {
+export function deleteCustomerInfo(id) {
   return axios({
-    url: '/Admin/UsingIdToSearch',
+    url: '/Admin/DeleteOneCustomer',
     method: 'post',
     params: {
       id
