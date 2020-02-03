@@ -297,6 +297,7 @@
   import axios from "../../../network/axios";
   import {adminSearchUser} from "../../../network/profile/adminSearchUser";
   import {updateOneClient} from "../../../network/profile/updateOneClient";
+  import {deleteOneProfile} from "../../../network/profile/deleteOneProfile";
 
   export default {
     name: "ProfileAdminInfo",

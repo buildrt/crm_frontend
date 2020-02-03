@@ -186,6 +186,12 @@
 
 <script>
   import {searchCustomerByName} from "../../../network/customer/searchCustomerByName";
+  import {deleteCustomerInfoByCommon} from "../../../network/customer/commonUser/deleteCustomerInfoByCommon";
+  import {searchCustomerByNameByCommon} from "../../../network/customer/commonUser/searchCustomerByNameByCommon";
+  import {insertCustomerByIdByCommon} from "../../../network/customer/commonUser/insertOneCustomerByIdByCommon";
+  import {deleteCustomerInfo} from "../../../network/customer/deleteCustomerInfo";
+  import {insertCustomerById} from "../../../network/customer/insertOneCustomerById";
+  import {updateCustomerInfo} from "../../../network/customer/updateCustomerInfo";
 
   export default {
     name: "ClientInfo",
@@ -203,36 +209,68 @@
       },
       deleteCustomer(index, row) {
         console.log(index, row);
-        deleteCustomerInfo(row.id).then(res => {
-          console.log(res);
-          if (res === 1) {
-            alert('删除成功');
-            this.$router.go(0);
-          } else {
-            alert("删除失败");
-          }
-        }).catch(err => {
-          console.log(err);
-        });
+        if (window.localStorage.getItem('isAdmin') === true) {
+          deleteCustomerInfo(row.id).then(res => {
+            console.log(res);
+            if (res === 1) {
+              alert('删除成功');
+              this.$router.go(0);
+            } else {
+              alert("删除失败");
+            }
+          }).catch(err => {
+            console.log(err);
+          });
+        }else {
+          deleteCustomerInfoByCommon(row.id).then(res => {
+            console.log(res);
+            if (res === 1) {
+              alert('删除成功');
+              this.$router.go(0);
+            } else {
+              alert("删除失败");
+            }
+          }).catch(err => {
+            console.log(err);
+          });
+        }
         this.clientData.splice(index,1);
       },
       selectCustomerBtn() {
         console.log(this.clientSearchData.thename);
-        searchCustomerByName(this.clientSearchData.thename).then(res => {
-          console.log(res);
-          console.log(res.length);
-          this.clientData = [];
-          this.clientData[0].id = res.id;
-          this.clientData[0].thename = res.thename;
-          this.clientData[0].trendType = res.trendType;
-          this.clientData[0].tel = res.tel;
-          this.clientData[0].cusPriority = res.cusPriority;
-          this.clientData[0].sources = res.sources;
-          this.clientData[0].descriptions = res.descriptions;
-        }).catch(err => {
-          console.log(err);
-        })
+        if (window.localStorage.getItem('isAdmin') === true) {
+          searchCustomerByName(this.clientSearchData.thename).then(res => {
+            console.log(res);
+            console.log(res.length);
+            this.clientData = [];
+            this.clientData[0].id = res.id;
+            this.clientData[0].thename = res.thename;
+            this.clientData[0].trendType = res.trendType;
+            this.clientData[0].tel = res.tel;
+            this.clientData[0].cusPriority = res.cusPriority;
+            this.clientData[0].sources = res.sources;
+            this.clientData[0].descriptions = res.descriptions;
+          }).catch(err => {
+            console.log(err);
+          })
+        }else {
+          searchCustomerByNameByCommon(this.clientSearchData.thename).then(res => {
+            console.log(res);
+            console.log(res.length);
+            this.clientData = [];
+            this.clientData[0].id = res.id;
+            this.clientData[0].thename = res.thename;
+            this.clientData[0].trendType = res.trendType;
+            this.clientData[0].tel = res.tel;
+            this.clientData[0].cusPriority = res.cusPriority;
+            this.clientData[0].sources = res.sources;
+            this.clientData[0].descriptions = res.descriptions;
+          }).catch(err => {
+            console.log(err);
+          })
+        }
       },
+      //修改客户信息功能未做管理员与一般用户区分，原因是后端未提供一般用户修改功能接口
       editCustomerBtn(formName) {
         this.$refs[formName].validate(valid => {
           if (valid) {
@@ -259,18 +297,33 @@
       InsertOneCustomerById(formName) {
         this.$refs[formName].validate(valid => {
           if (valid) {
-            insertCustomerById(this.addOneCustomerByIdData.id,this.addOneCustomerByIdData.thename,this.addOneCustomerByIdData.cusPriority,this.addOneCustomerByIdData.sources,this.addOneCustomerByIdData.tel,this.addOneCustomerByIdData.trendType,this.addOneCustomerByIdData.descriptions).then(res => {
-              console.log(res);
-              if (res === 1) {
-                alert('添加成功');
-                this.addCustomerDrawer = false;
-                this.$router.go(0);
-              } else {
-                alert('添加失败');
-              }
-            }).catch(err => {
-              console.log(err);
-            })
+            if (window.localStorage.getItem('isAdmin') === true) {
+              insertCustomerById(this.addOneCustomerByIdData.id,this.addOneCustomerByIdData.thename,this.addOneCustomerByIdData.cusPriority,this.addOneCustomerByIdData.sources,this.addOneCustomerByIdData.tel,this.addOneCustomerByIdData.trendType,this.addOneCustomerByIdData.descriptions).then(res => {
+                console.log(res);
+                if (res === 1) {
+                  alert('添加成功');
+                  this.addCustomerDrawer = false;
+                  this.$router.go(0);
+                } else {
+                  alert('添加失败');
+                }
+              }).catch(err => {
+                console.log(err);
+              })
+            }else {
+              insertCustomerByIdByCommon(this.addOneCustomerByIdData.id,this.addOneCustomerByIdData.thename,this.addOneCustomerByIdData.cusPriority,this.addOneCustomerByIdData.sources,this.addOneCustomerByIdData.tel,this.addOneCustomerByIdData.trendType,this.addOneCustomerByIdData.descriptions).then(res => {
+                console.log(res);
+                if (res === 1) {
+                  alert('添加成功');
+                  this.addCustomerDrawer = false;
+                  this.$router.go(0);
+                } else {
+                  alert('添加失败');
+                }
+              }).catch(err => {
+                console.log(err);
+              })
+            }
           }
         })
       }
@@ -377,7 +430,7 @@
     left: 10%;
     height: 6%;
     width: 80%;
-    border: 1px black solid;
+    /*border: 1px black solid;*/
   }
   #clientSearch #clientForm {
     position: absolute;

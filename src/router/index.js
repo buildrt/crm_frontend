@@ -137,6 +137,11 @@ if (window.localStorage.getItem('loginJudge') === 'true') {
   store.commit('setIsLogin',Boolean(window.localStorage.getItem('loginJudge')));
 }
 
+if (window.localStorage.getItem('isAdmin') === true) {
+  console.log(Boolean(window.localStorage.getItem('isAdmin')));
+  store.commit('setIsAdmin',Boolean(window.localStorage.getItem('isAdmin')));
+}
+
 window.onbeforeunload = function (e) {
   e = e || window.event;
 

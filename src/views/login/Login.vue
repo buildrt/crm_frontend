@@ -84,6 +84,10 @@
               //       setTimeout(() => {
               //         this.$store.commit('setIsLogin', true);
               //         window.localStorage.setItem('loginJudge', 'true');
+              //         if (res.roleName === 'admin'){
+              //           this.$store.commit('isAdmin', true);
+              //           window.localStorage.setItem('isAdmin', 'true');
+              //         }
               //         this.$router.replace('/home');
               //       },1000);
               //     },300)
@@ -104,6 +108,8 @@
                   setTimeout(() => {
                     this.$store.commit('setIsLogin', true);
                     window.localStorage.setItem('loginJudge', 'true');
+                    this.$store.commit('isAdmin', true);
+                    window.localStorage.setItem('isAdmin', 'true');
                     this.$router.replace('/home');
                   },1000);
                 },300)

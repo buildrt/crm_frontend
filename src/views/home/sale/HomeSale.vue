@@ -218,6 +218,9 @@
   import {searchSaleDataById} from "../../../network/sale/searchSaleDataById";
   import {searchSaleDataByName} from "../../../network/sale/searchSaleDataByName";
   import {insertOneSaleByName} from "../../../network/sale/insertOneSaleByName";
+  import {deleteSaleData} from "../../../network/sale/deleteSale";
+  import {insertOneSaleById} from "../../../network/sale/insertOneSaleById";
+  import {updateSaleData} from "../../../network/sale/updateSaleData";
 
   export default {
     name: "HomeSale",

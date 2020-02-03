@@ -179,6 +179,7 @@
   import VueScrollTo from 'vue-scrollto'
   import axios from "../../network/axios";
   import {searchMyFullData} from "../../network/profile/searchMyFullData";
+  import {updateMyData} from "../../network/profile/updateMyData";
   Vue.use(VueScrollTo);
 
   export default {
