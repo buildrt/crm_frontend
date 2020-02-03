@@ -150,7 +150,7 @@
         </el-form>
       </el-drawer>
       <el-drawer
-        title="添加一个商机信息"
+        title="修改一个商机信息"
         id="editOneOpporByIdInfo"
         :visible.sync="editOneOpporDrawer"
         direction="rtl"
@@ -346,7 +346,8 @@
             }
           }).catch(err => {
             console.log(err);
-          })
+          });
+          this.opporData.splice(index,1);
         }else {
           deleteOpporByCommon(row.id).then(res =>{
             console.log(res);
@@ -358,7 +359,8 @@
             }
           }).catch(err => {
             console.log(err);
-          })
+          });
+          this.opporData.splice(index,1);
         }
       },
       editOppor(index, row) {
@@ -489,7 +491,7 @@
     left: 10%;
     height: 6%;
     width: 80%;
-    border: 1px black solid;
+    /*border: 1px black solid;*/
   }
   #opporSearch #opporForm {
     position: absolute;

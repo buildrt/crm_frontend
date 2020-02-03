@@ -221,6 +221,7 @@
           }).catch(err => {
             console.log(err);
           });
+          this.clientData.splice(index,1);
         }else {
           deleteCustomerInfoByCommon(row.id).then(res => {
             console.log(res);
