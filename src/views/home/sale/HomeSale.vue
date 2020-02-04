@@ -45,8 +45,7 @@
         </el-table-column>
         <el-table-column
           fixed
-          sortable
-          prop="id"
+          sortableprop="id"
           label="销售id"
           width="120">
         </el-table-column>

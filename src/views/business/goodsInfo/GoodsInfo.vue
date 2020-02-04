@@ -9,6 +9,7 @@
       <p>产品</p>
       <div id="goodsSearch">
         <el-button type="primary" id="searchGoodsBtn" @click="searchGoodsDrawer = true">按条件查询</el-button>
+        <el-button type="primary" id="addGoodsBtn" @click="goodsAddDrawer = true">新建产品</el-button>
       </div>
       <el-table
         :data="goodsData.slice((currpage-1)*pagesize,currpage*pagesize)"
@@ -80,7 +81,7 @@
           <template slot-scope="scope">
             <el-button
               type="primary"
-              @click="handleEdit(scope.$index, scope.row)"
+              @click="goodsEditBtn(scope.$index, scope.row)"
               size="mini">修改</el-button>
             <el-button
               size="mini"
@@ -138,6 +139,101 @@
           </el-form-item>
         </el-form>
       </el-drawer>
+      <el-drawer
+        title="修改一个产品信息"
+        id="editOneGoodsByIdInfo"
+        :visible.sync="goodsEditDrawer"
+        direction="rtl"
+        size="30%">
+        <el-form
+          :model="goodsEditData"
+          :rules="goodsEditRules"
+          ref="goodsEditData"
+          id="editOneGoodsDataForm"
+          style="width: 96%"
+          label-position="right">
+          <el-form-item label="名称" label-width="100px" prop="thename" >
+            <el-input type="text" v-model="goodsEditData.thename"></el-input>
+          </el-form-item>
+          <el-form-item label="类别" label-width="100px" prop="thetype" >
+            <el-input type="text" v-model="goodsEditData.thetype"></el-input>
+          </el-form-item>
+          <el-form-item label="数量" label-width="100px" prop="amount" >
+            <el-input type="text" v-model="goodsEditData.amount"></el-input>
+          </el-form-item>
+          <el-form-item label="单价" label-width="100px" prop="cost" >
+            <el-input type="text" v-model="goodsEditData.cost"></el-input>
+          </el-form-item>
+          <el-form-item label="位置" label-width="100px" prop="thelocation" >
+            <el-input type="text" v-model="goodsEditData.thelocation"></el-input>
+          </el-form-item>
+          <el-form-item label="来源" label-width="100px" prop="sources" >
+            <el-input type="text" v-model="goodsEditData.sources"></el-input>
+          </el-form-item>
+          <el-form-item label="备注" label-width="100px" prop="descriptions" >
+            <el-input type="text" v-model="goodsEditData.descriptions"></el-input>
+          </el-form-item>
+          <el-form-item label="入库时间" label-width="100px" prop="intime" >
+            <el-input type="text" v-model="goodsEditData.intime"></el-input>
+          </el-form-item>
+          <el-form-item label="上架状态" label-width="100px" prop="isreleased" >
+            <el-input type="text" v-model="goodsEditData.isreleased"></el-input>
+          </el-form-item>
+          <el-form-item label-width="100px">
+            <el-button type="primary" @click="editOneGoodsInfo('goodsEditData')">修改</el-button>
+            <el-button @click="goodsCancel('goodsEditData')">取消</el-button>
+          </el-form-item>
+        </el-form>
+      </el-drawer>
+      <el-drawer
+        title="添加一个产品信息"
+        id="addOneGoodsByIdInfo"
+        :visible.sync="goodsAddDrawer"
+        direction="rtl"
+        size="30%">
+        <el-form
+          :model="goodsAddData"
+          :rules="goodsAddRules"
+          ref="goodsAddData"
+          id="addOneGoodsDataForm"
+          style="width: 96%"
+          label-position="right">
+          <el-form-item label="产品id" label-width="100px" prop="id" >
+            <el-input type="text" v-model="goodsAddData.id"></el-input>
+          </el-form-item>
+          <el-form-item label="产品名称" label-width="100px" prop="thename" >
+            <el-input type="text" v-model="goodsAddData.thename"></el-input>
+          </el-form-item>
+          <el-form-item label="类别" label-width="100px" prop="thetype" >
+            <el-input type="text" v-model="goodsAddData.thetype"></el-input>
+          </el-form-item>
+          <el-form-item label="数量" label-width="100px" prop="amount" >
+            <el-input type="text" v-model="goodsAddData.amount"></el-input>
+          </el-form-item>
+          <el-form-item label="单价" label-width="100px" prop="cost" >
+            <el-input type="text" v-model="goodsAddData.cost"></el-input>
+          </el-form-item>
+          <el-form-item label="位置" label-width="100px" prop="thelocation" >
+            <el-input type="text" v-model="goodsAddData.thelocation"></el-input>
+          </el-form-item>
+          <el-form-item label="来源" label-width="100px" prop="sources" >
+            <el-input type="text" v-model="goodsAddData.sources"></el-input>
+          </el-form-item>
+          <el-form-item label="备注" label-width="100px" prop="descriptions" >
+            <el-input type="text" v-model="goodsAddData.descriptions"></el-input>
+          </el-form-item>
+          <el-form-item label="入库时间" label-width="100px" prop="intime" >
+            <el-input type="text" v-model="goodsAddData.intime"></el-input>
+          </el-form-item>
+          <el-form-item label="上架状态" label-width="100px" prop="isreleased" >
+            <el-input type="text" v-model="goodsAddData.isreleased"></el-input>
+          </el-form-item>
+          <el-form-item label-width="100px">
+            <el-button type="primary" @click="addOneGoodsInfo('goodsAddData')">添加</el-button>
+            <el-button @click="goodsCancel('goodsAddData')">取消</el-button>
+          </el-form-item>
+        </el-form>
+      </el-drawer>
     </div>
     <div id="foot">
 
@@ -148,6 +244,8 @@
 <script>
   import {selectGoodsInfo} from "../../../network/goods/selectGoodsInfo";
   import {deleteGoodsInfo} from "../../../network/goods/deleteGoodsInfo";
+  import {updateOneGoodsInfo} from "../../../network/goods/updateOneGoodsInfo";
+  import {insertOneGoodsInfo} from "../../../network/goods/insertOneGoodsInfo";
 
   export default {
     name: "GoodsInfo",
@@ -182,6 +280,38 @@
             isreleased: "1"
           }
         ],
+        goodsEditData: {
+          id: "",
+          thename: "",
+          thetype: "",
+          amount: "",
+          cost: "",
+          thelocation: "",
+          sources: "",
+          descriptions: "",
+          intime: "",
+          isreleased: ""
+        },
+        goodsEditRules: {
+
+        },
+        goodsEditDrawer: false,
+        goodsAddData: {
+          id: "",
+          thename: "",
+          thetype: "",
+          amount: "",
+          cost: "",
+          thelocation: "",
+          sources: "",
+          descriptions: "",
+          intime: "",
+          isreleased: "1"
+        },
+        goodsAddRules: {
+
+        },
+        goodsAddDrawer: false,
       }
     },
     methods: {
@@ -191,8 +321,28 @@
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
       },
-      handleEdit(index, row) {
+      goodsEditBtn(index, row) {
         console.log(index, row);
+        this.goodsEditData.id = row.id;
+        this.goodsEditDrawer = true;
+      },
+      editOneGoodsInfo(formName) {
+        this.$refs[formName].validate(valid => {
+          if (valid) {
+            updateOneGoodsInfo(this.goodsEditData.id,this.goodsEditData.thename,this.goodsEditData.thetype,this.goodsEditData.amount,this.goodsEditData.cost,this.goodsEditData.thelocation,this.goodsEditData.sources,this.goodsEditData.descriptions,this.goodsEditData.intime,this.goodsEditData.isreleased).then(res => {
+              console.log(res);
+              if (res === 1) {
+                alert('修改成功');
+                this.goodsEditDrawer = false;
+                this.$router.go(0);
+              } else {
+                alert('修改失败');
+              }
+            }).catch(err => {
+              console.log(err);
+            })
+          }
+        })
       },
       goodsDelete(index, row) {
         console.log(index, row);
@@ -212,6 +362,8 @@
       goodsCancel(formName) {
         this.$refs[formName].resetFields();
         this.searchGoodsDrawer = false;
+        this.goodsEditDrawer = false;
+        this.goodsAddDrawer = false;
       },
       searchGoodsInfoBtn(formName) {
         this.$refs[formName].validate(valid => {
@@ -244,6 +396,24 @@
           }
         })
       },
+      addOneGoodsInfo(formName) {
+        this.$refs[formName].validate(valid => {
+          if (valid) {
+            insertOneGoodsInfo(this.goodsAddData.id,this.goodsAddData.thename,this.goodsAddData.thetype,this.goodsAddData.amount,this.goodsAddData.cost,this.goodsAddData.thelocation,this.goodsAddData.sources,this.goodsAddData.descriptions,this.goodsAddData.intime,this.goodsAddData.isreleased).then(res => {
+              console.log(res);
+              if (res === 1) {
+                alert('添加成功');
+                this.goodsAddDrawer = false;
+                this.$router.go(0);
+              } else {
+                alert('添加失败');
+              }
+            }).catch(err => {
+              console.log(err);
+            })
+          }
+        })
+      }
     }
   }
 </script>
@@ -295,11 +465,15 @@
     left: 10%;
     height: 6%;
     width: 80%;
-    border: 1px black solid;
+    /*border: 1px black solid;*/
   }
   #searchGoodsBtn {
     position: absolute;
     left: 0;
+  }
+  #addGoodsBtn {
+    position: absolute;
+    left: 15%;
   }
   .el-table{
     position: absolute;
@@ -317,7 +491,7 @@
     width: 99%;
     height: 50px;
   }
-  #searchGoodsInfo {
+  #searchGoodsInfo, #editOneGoodsByIdInfo, #addOneGoodsByIdInfo{
     position: absolute;
     top: 0;
     left: 0;
@@ -326,7 +500,7 @@
     font-size: 22px;
     font-weight: bolder;
   }
-  #goodsSearchDataForm {
+  #goodsSearchDataForm, #editOneGoodsDataForm, #addOneGoodsDataForm {
     position: absolute;
     width: 100%;
     height: 150%;
@@ -334,7 +508,7 @@
     /*border: 1px solid black;*/
     margin-left: 2%;
   }
-  #goodsSearchDataForm .el-input {
+  #goodsSearchDataForm .el-input, #editOneGoodsDataForm .el-input, #addOneGoodsDataForm .el-input {
     width: 200px;
   }
 </style>

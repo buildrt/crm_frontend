@@ -312,6 +312,7 @@
         searchOpporDataByCommon(this.opporSearchData.cid).then(res => {
           console.log(res);
           console.log(res.length);
+          this.opporData = [];
           let OpporData = res;
           let data = [];
           let len = OpporData.length;
